@@ -33,7 +33,8 @@ class DownloadManager: NSObject {
     public var maxDownloadCount: Int = 3 /// 最大并发数
     
     private lazy var session: URLSession = {
-        let configuration = URLSessionConfiguration.background(withIdentifier: "DownloadBackgroundSessionIdentifier")
+//        let configuration = URLSessionConfiguration.background(withIdentifier: "DownloadBackgroundSessionIdentifier")
+        let configuration = URLSessionConfiguration.default
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         let session = URLSession(configuration: configuration, delegate: self, delegateQueue: queue)
