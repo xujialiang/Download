@@ -12,8 +12,6 @@ import UIKit
 let DownloadProgressNotification: Notification.Name = Notification.Name("DownloadProgressNotification")
 
 class DownloadModel: NSObject {
-
-    var stream: OutputStream? /// 流
     
     public var states: DownloadState = .default {
         didSet {
@@ -47,8 +45,10 @@ class DownloadDescModel: Codable {
     /** 必须有的属性 -- 开始 */
     public var url: String? /// 下载地址
     
-    public var totalLength: Int = 0 /// 获得服务器这次请求 返回数据的总长度
-    public var receivedSize: Int = 0 /// 已经下载的长度
+    public var resumeDataPath: String? /// 恢复下载时的文件路径
+    
+    public var totalLength: Int64 = 0 /// 获得服务器这次请求 返回数据的总长度
+    public var receivedSize: Int64 = 0 /// 已经下载的长度
     
     /// 下载进度
     public var progress: Double = 0.0 {
