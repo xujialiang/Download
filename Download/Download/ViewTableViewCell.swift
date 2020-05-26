@@ -73,6 +73,8 @@ class ViewTableViewCell: UITableViewCell {
             return "等待"
         case .suspended:
             return "暂停"
+        case .failed:
+            return "重新下载"
         default:
             return "开始"
         }
