@@ -362,6 +362,12 @@ extension DownloadManager: URLSessionDataDelegate {
             let stream = model.stream,
             let url = model.model.url else { return }
         
+        if((response as! HTTPURLResponse).statusCode == 404) {
+            model.states = .failed
+            completionHandler(.cancel)
+            return;
+        }
+        
         // 打开流
         stream.open()
         
