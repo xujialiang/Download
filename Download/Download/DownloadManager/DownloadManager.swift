@@ -327,11 +327,20 @@ extension DownloadManager: URLSessionDelegate {
 extension DownloadManager: URLSessionTaskDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
-        if let error = error, error.localizedDescription == "cancelled" { return }
-        
         guard let model = sessionModels["\(task.taskIdentifier)"],
             let url = model.model.url,
             url.dw_isURL else { return }
+        
+        if let error = error, error.localizedDescription == "cancelled" {
+            // 关闭流
+            model.stream?.close()
+            model.stream = nil
+            // 清除任务
+            tasks.removeValue(forKey: url.dw_getFileName)
+            sessionModels.removeValue(forKey: "\(task.taskIdentifier)")
+            
+            return
+        }
         
         if let error = error {
             if model.states != .suspended && error.localizedDescription != "The request timed out." {
