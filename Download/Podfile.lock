@@ -9,7 +9,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Cache
     - MJRefresh
     - SnapKit
@@ -21,4 +21,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 242da3ec9c88174624c54abd68f6d80ac767b49a
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.9.2
