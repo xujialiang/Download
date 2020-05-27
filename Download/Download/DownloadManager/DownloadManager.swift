@@ -399,9 +399,13 @@ extension DownloadManager: URLSessionTaskDelegate {
         }
         let status = response.statusCode
         
-        if error != nil || status == 404{
+        if error != nil || status != 200{
             debugPrint("下载失败")
-            model.failedReason = "404"
+            if error != nil {
+                model.failedReason = error!.localizedDescription
+            }else {
+                model.failedReason = "\(status)"
+            }
             model.states = .failed
         } else {
             debugPrint("下载完成")
@@ -426,11 +430,25 @@ extension DownloadManager: URLSessionDownloadDelegate {
 
         let status = response.statusCode
 //        let completeHeader = response.allHeaderFields
-        if(status == 404) {
-            debugPrint("下载链接错误")
+        if(status == 404 || status == 500) {
+            debugPrint("下载错误")
         }else {
             // 移动文件到指定目录
             debugPrint("开始移动文件")
+            guard let model = sessionModels["\(downloadTask.taskIdentifier)"],
+                let uid = model.model.uid,
+            let url = model.model.url else { return }
+            let toUrl = DownloadCachePath + uid + url.dw_pathExtension
+            let destUrl = URL(fileURLWithPath: toUrl)
+            do {
+                let isExist = FileManager.default.fileExists(atPath: toUrl)
+                if isExist {
+                    debugPrint("已存在文件，执行删除")
+                    try FileManager.default.removeItem(at: destUrl)
+                }
+                try FileManager.default.copyItem(at: location, to: destUrl)
+                debugPrint("copy文件到", destUrl)
+            } catch  {}
         }
     }
     // 下载代理方法，监听下载进度
@@ -440,7 +458,7 @@ extension DownloadManager: URLSessionDownloadDelegate {
         }
         debugPrint("response status code, %@", response.statusCode, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
         let status = response.statusCode
-        if(status == 404) {
+        if(status == 404 || status == 500) {
             return
         }
 //        debugPrint("response, %@", response)
