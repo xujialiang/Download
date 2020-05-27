@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var backgroundid: UIBackgroundTaskIdentifier?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -28,28 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        debugPrint("handleEventsForBackgroundURLSession")
         DownloadManager.default.backgroundSessionCompletionHandler = completionHandler
     }
     
     
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        UIApplication.shared.beginBackgroundTask {}
-//        bgTask = [application beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
-//            // Clean up any unfinished task business by marking where you
-//            // stopped or ending the task outright.
-//            [application endBackgroundTask:bgTask];
-//            bgTask = UIBackgroundTaskInvalid;
-//        }];
-//
-//        // Start the long-running task and return immediately.
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//
-//            // Do the work associated with the task, preferably in chunks.
-//
-//            [application endBackgroundTask:bgTask];
-//            bgTask = UIBackgroundTaskInvalid;
-//        });
+        debugPrint("applicationDidEnterBackground")
+        self.backgroundid =  UIApplication.shared.beginBackgroundTask(withName: "DownloadBackgroundSessionIdentifier", expirationHandler: {
+            debugPrint("applicationDidEnterBackground expirationHandler")
+            UIApplication.shared.endBackgroundTask(self.backgroundid!)
+            self.backgroundid = UIBackgroundTaskIdentifier.invalid
+        })
+
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

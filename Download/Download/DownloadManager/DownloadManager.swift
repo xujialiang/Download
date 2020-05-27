@@ -35,8 +35,8 @@ class DownloadManager: NSObject {
     public var maxDownloadCount: Int = 3 /// 最大并发数
     
     public lazy var session: URLSession = {
-//        let configuration = URLSessionConfiguration.background(withIdentifier: "DownloadBackgroundSessionIdentifier")
-        let configuration = URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.background(withIdentifier: "DownloadBackgroundSessionIdentifier")
+//        let configuration = URLSessionConfiguration.default
         configuration.sessionSendsLaunchEvents = true
         configuration.isDiscretionary = true
         configuration.timeoutIntervalForRequest = .infinity
@@ -89,18 +89,17 @@ extension DownloadManager {
         
         // 如果该任务存在临时文件
         if isExistenceTmp(uid: uid) {
-            debugPrint("存在缓存文件")
             // 创建一个Data任务
             let tmpFilePath = self.path(uid: uid) + ".tmp"
+            debugPrint("存在缓存文件", tmpFilePath)
             do {
+                
                 let resumeData = try Data.init(contentsOf: URL(fileURLWithPath: tmpFilePath))
                 let task = session.downloadTask(withResumeData: resumeData)
-                let taskIdentifier = arc4random() % ((arc4random() % 10000 + arc4random() % 10000))
-                task.setValue(taskIdentifier, forKey: "taskIdentifier")
                 // 保存任务
                 tasks[uid] = task
                 model.states = .waiting
-                sessionModels["\(taskIdentifier)"] = model
+                sessionModels["\(task.taskIdentifier)"] = model
                 save(uid: uid)
                 start(uid: uid)
             }catch{}
@@ -114,18 +113,16 @@ extension DownloadManager {
 //            request.setValue("bytes=\(getDownloadSize(uid: uid))-", forHTTPHeaderField: "Range")
             // 创建一个Data任务
             let task = session.downloadTask(with: request)
-            tasks[uid] = task
-            let taskIdentifier = Int(arc4random() % ((arc4random() % 10000 + arc4random() % 10000)))  + sessionModels.keys.count
-            task.setValue(taskIdentifier, forKey: "taskIdentifier")
+            debugPrint("taskIdentifier", task.taskIdentifier)
             // 保存任务
+            tasks[uid] = task
             model.states = .waiting
             // sessionModels 必须使用taskIdentifier
             // 因为在URLSessionTaskDelegate的回调中，返回的是task，要想找到task对应的model，只能用taskIdentifier作为key
-            sessionModels["\(taskIdentifier)"] = model
+            sessionModels["\(task.taskIdentifier)"] = model
             save(uid: uid)
             start(uid: uid)
         }
-        
     }
     
     /// 判断该文件是否下载完成
@@ -381,7 +378,10 @@ extension DownloadManager: URLSessionDelegate {
     /// 应用处于后台，所有下载任务完成及URLSession协议调用之后调用
     func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         DispatchQueue.main.async {
-            self.backgroundSessionCompletionHandler!()
+            if let handler = self.backgroundSessionCompletionHandler {
+                debugPrint("backgroundSessionCompletionHandler")
+                handler()
+            }
         }
     }
 }
@@ -396,22 +396,22 @@ extension DownloadManager: URLSessionTaskDelegate {
         
         var hasError = false
         if error != nil {
-            debugPrint("下载失败", error?.localizedDescription ?? "")
             model.failedReason = error!.localizedDescription
             hasError = true
         }
         if let response = task.response as? HTTPURLResponse {
             let status = response.statusCode
-            if status != 200 {
+            if status != 200 && status != 206 {
                 model.failedReason = "\(status)"
+                hasError = true
             }
-            hasError = true
         }
         
         if !hasError {
             debugPrint("下载完成")
             model.states = .completed
         }else {
+            debugPrint("下载失败", model.failedReason)
             model.states = .failed
         }
         
@@ -432,7 +432,7 @@ extension DownloadManager: URLSessionDownloadDelegate {
 
         let status = response.statusCode
 //        let completeHeader = response.allHeaderFields
-        if(status == 404 || status == 500) {
+        if(status != 200 && status != 206) {
             debugPrint("下载错误")
         }else {
             // 移动文件到指定目录
@@ -440,6 +440,11 @@ extension DownloadManager: URLSessionDownloadDelegate {
             guard let model = sessionModels["\(downloadTask.taskIdentifier)"],
                 let uid = model.model.uid,
             let url = model.model.url else { return }
+            
+            model.model.progress = 1.0
+            model.model.receivedSize = model.model.totalLength
+            model.save(uid: uid, descModel: model.model)
+            
             let toUrl = DownloadCachePath + uid + url.dw_pathExtension
             let destUrl = URL(fileURLWithPath: toUrl)
             do {
@@ -448,9 +453,13 @@ extension DownloadManager: URLSessionDownloadDelegate {
                     debugPrint("已存在文件，执行删除")
                     try FileManager.default.removeItem(at: destUrl)
                 }
+                // 创建目录
+                let _ = self.path(uid: "")
                 try FileManager.default.copyItem(at: location, to: destUrl)
                 debugPrint("copy文件到", destUrl)
-            } catch  {}
+            } catch {
+                debugPrint("出错啦", error)
+            }
         }
     }
     // 下载代理方法，监听下载进度
@@ -460,7 +469,7 @@ extension DownloadManager: URLSessionDownloadDelegate {
         }
         debugPrint("response status code, %@", response.statusCode, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
         let status = response.statusCode
-        if(status == 404 || status == 500) {
+        if(status != 200 && status != 206) {
             return
         }
 //        debugPrint("response, %@", response)
