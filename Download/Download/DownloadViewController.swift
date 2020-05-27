@@ -126,7 +126,7 @@ extension DownloadViewController: UITableViewDelegate, UITableViewDataSource {
             guard let `self` = self else { return }
             /// 删除时先移除通知再注册通知（防止数据改变导致进度和状态错乱）
             NotificationCenter.default.removeObserver(self)
-            DownloadManager.default.deleteFile(url: model.model.url!)
+            DownloadManager.default.deleteFile(uid: model.model.uid!)
             self.loadData()
             self.addNotification()
         }
@@ -138,8 +138,8 @@ extension DownloadViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataSource[indexPath.row]
-        if let url = model.model.url {
-            debugPrint(DownloadManager.default.getFile(url: url))
+        if let uid = model.model.uid {
+            debugPrint(DownloadManager.default.getFile(uid: uid))
         }
     }
 }

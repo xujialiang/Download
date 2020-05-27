@@ -40,7 +40,7 @@ class ViewTableViewCell: UITableViewCell {
         self.model = model
         nameLabel.text = model.model.name
         
-        if let url = model.model.url, let model1 = model.getDownloadModel(url: url) {
+        if let uid = model.model.uid, let model1 = model.getDownloadModel(uid: uid) {
             stateBtn.setTitle(state(state: model1.state), for: .normal)
             progressView.update(model: model1)
         } else {

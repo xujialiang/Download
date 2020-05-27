@@ -36,7 +36,7 @@ class ProgressView: UIView {
     
     func update(model: DownloadDescModel) {
         progressLabel.text = "\(model.progress)"
-        debugPrint("progress: \(model.progress) -- receivedSize: \(model.receivedSize) -- totalLength: \(model.totalLength)")
+        debugPrint("progress: \(model.progress) -- receivedSize: \(model.receivedSize) -- totalLength: \(model.totalLength) -- failedReason: \(model.failedReason ?? "")")
         
         let width = frame.size.width * CGFloat(model.progress)
         progressView.snp.updateConstraints { (make) in

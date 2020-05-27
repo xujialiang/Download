@@ -30,14 +30,19 @@ class DownloadManager: NSObject {
 
     public static let `default` = DownloadManager()
     
+    public var backgroundSessionCompletionHandler: (() -> Void)?
+    
     public var maxDownloadCount: Int = 3 /// 最大并发数
     
-    private lazy var session: URLSession = {
+    public lazy var session: URLSession = {
 //        let configuration = URLSessionConfiguration.background(withIdentifier: "DownloadBackgroundSessionIdentifier")
         let configuration = URLSessionConfiguration.default
+        configuration.sessionSendsLaunchEvents = true
+        configuration.isDiscretionary = true
+        configuration.timeoutIntervalForRequest = .infinity
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
-        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: queue)
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
         return session
     }()
     
@@ -52,100 +57,121 @@ extension DownloadManager {
     
     /// 开启下载
     public func download(model: DownloadModel) {
-        guard let url = model.model.url, url.dw_isURL else { return }
-        
-        if isExistence(url: url), isCompletion(url: url) {
+        guard let url = model.model.url, url.dw_isURL else { debugPrint("下载链接错误"); return }
+        // 如果没有设置UID，使用url的md5作为UID
+        // 如果设置了UID，则以设置的UID为准
+        var uuid: String! = url.dw_MD5String
+        if(model.model.uid != nil) {
+            uuid = model.model.uid!
+        }else {
+            debugPrint("未设置UID,使用URL的MD5作为UID")
+        }
+        guard let uid = uuid else {
+            // 理论上永远不会走到这里
+            debugPrint("UID为空")
             return
         }
         
-        if let _ = tasks[url.dw_getFileName] {
-            handle(url: url)
+        debugPrint("url && uid", url, uid)
+        
+        // 如果存在文件，并且是已经下载完的，则直接返回。
+        if isExistence(uid: uid), isCompletion(uid: uid) {
+            debugPrint("文件已下载完成，无需重复下载")
             return
         }
         
-        if isExistenceTmp(url: url) {
+        // 如果存在这个下载任务，不重复创建任务
+        if let _ = tasks[uid] {
+            debugPrint("已存在的下载任务，进一步处理")
+            handle(uid: uid)
+            return
+        }
+        
+        // 如果该任务存在临时文件
+        if isExistenceTmp(uid: uid) {
+            debugPrint("存在缓存文件")
             // 创建一个Data任务
-            let tmpFilePath = self.path(url: url) + ".tmp"
+            let tmpFilePath = self.path(uid: uid) + ".tmp"
             do {
                 let resumeData = try Data.init(contentsOf: URL(fileURLWithPath: tmpFilePath))
                 let task = session.downloadTask(withResumeData: resumeData)
                 let taskIdentifier = arc4random() % ((arc4random() % 10000 + arc4random() % 10000))
                 task.setValue(taskIdentifier, forKey: "taskIdentifier")
                 // 保存任务
-                tasks[url.dw_getFileName] = task
+                tasks[uid] = task
                 model.states = .waiting
                 sessionModels["\(taskIdentifier)"] = model
-                save(url: url)
-                start(url: url)
+                save(uid: uid)
+                start(uid: uid)
             }catch{}
         }else{
+            debugPrint("不存在缓存文件, 发起一个新请求，从头开始下载")
             // 创建请求
             var request = URLRequest(url: URL(string: url)!)
             // 忽略本地缓存，代理服务器以及其他中介，直接请求源服务端
             request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
             // 设置请求头
-            request.setValue("bytes=\(getDownloadSize(url: url))-", forHTTPHeaderField: "Range")
+//            request.setValue("bytes=\(getDownloadSize(uid: uid))-", forHTTPHeaderField: "Range")
             // 创建一个Data任务
             let task = session.downloadTask(with: request)
-            let taskIdentifier = arc4random() % ((arc4random() % 10000 + arc4random() % 10000))
+            tasks[uid] = task
+            let taskIdentifier = Int(arc4random() % ((arc4random() % 10000 + arc4random() % 10000)))  + sessionModels.keys.count
             task.setValue(taskIdentifier, forKey: "taskIdentifier")
             // 保存任务
-            tasks[url.dw_getFileName] = task
-            
             model.states = .waiting
+            // sessionModels 必须使用taskIdentifier
+            // 因为在URLSessionTaskDelegate的回调中，返回的是task，要想找到task对应的model，只能用taskIdentifier作为key
             sessionModels["\(taskIdentifier)"] = model
-            
-            save(url: url)
-            
-            start(url: url)
+            save(uid: uid)
+            start(uid: uid)
         }
         
     }
     
     /// 判断该文件是否下载完成
-    public func isCompletion(url: String) -> Bool {
-        guard url.dw_isURL else { return false }
-        if let model = DownloadModel().getDownloadModel(url: url),
-            model.totalLength == getDownloadSize(url: url) {
+    public func isCompletion(uid: String) -> Bool {
+//        guard url.dw_isURL else { return false }
+        if let model = DownloadModel().getDownloadModel(uid: uid),
+            model.totalLength == getDownloadSize(uid: uid) {
             return true
         }
         return false
     }
     
     /// 判断该文件是否存在
-    public func isExistence(url: String) -> Bool {
+    public func isExistence(uid: String) -> Bool {
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: DownloadCachePath)
-            return files.contains(url.dw_getFileName)
+            return files.contains(uid)
         } catch {
             return false
         }
     }
     
     /// 判断该文件是否存在
-    public func isExistenceTmp(url: String) -> Bool {
+    public func isExistenceTmp(uid: String) -> Bool {
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: DownloadCachePath)
-            return files.contains(url.dw_getFileName + ".tmp")
+            return files.contains(uid + ".tmp")
         } catch {
             return false
         }
     }
     
     /// 根据url取消/暂停任务
-    public func cancelTask(url: String) {
-        guard url.dw_isURL else { return }
-        if let task = getTask(url: url) {
+    public func cancelTask(uid: String) {
+//        guard url.dw_isURL else { return }
+        if let task = getTask(uid: uid) {
             task.suspend()
             task.cancel(byProducingResumeData: { data in
                 if let model = self.getSessionModel(taskIdentifier: task.taskIdentifier) {
                     model.states = .suspended
-                    model.model.resumeDataPath = self.path(url: model.model.url!) + ".tmp"
+                    model.model.resumeDataPath = self.path(uid: model.model.uid!) + ".tmp"
                     do {
                         try data?.write(to: URL(fileURLWithPath: model.model.resumeDataPath!))
                     }catch {}
                     self.sessionModels.removeValue(forKey: "\(task.taskIdentifier)")
-                    self.tasks.removeValue(forKey: url.dw_getFileName)
+                    self.tasks.removeValue(forKey: uid)
                 }
                 self.waitingTask()
             });
@@ -166,18 +192,18 @@ extension DownloadManager {
     }
     
     /// 根据url删除资源
-    public func deleteFile(url: String) {
-        guard url.dw_isURL else { return }
-        cancelTask(url: url)
-        DownloadModel().delete(url: url)
+    public func deleteFile(uid: String) {
+//        guard url.dw_isURL else { return }
+        cancelTask(uid: uid)
+        DownloadModel().delete(uid: uid)
         do {
-            try FileManager.default.removeItem(atPath: DownloadCachePath + url.dw_getFileName)
+            try FileManager.default.removeItem(atPath: DownloadCachePath + uid)
         } catch {}
         
-        let urlArr: NSMutableArray = NSMutableArray(contentsOfFile: DownloadCacheURLPath) ?? NSMutableArray()
-        guard (urlArr.contains(url)) else { return }
-        urlArr.remove(url)
-        urlArr.write(toFile: DownloadCacheURLPath, atomically: true)
+        let uidArr: NSMutableArray = NSMutableArray(contentsOfFile: DownloadCacheURLPath) ?? NSMutableArray()
+        guard (uidArr.contains(uid)) else { return }
+        uidArr.remove(uid)
+        uidArr.write(toFile: DownloadCacheURLPath, atomically: true)
     }
     
     /// 清空所有下载资源
@@ -192,12 +218,12 @@ extension DownloadManager {
     
     /// 获取下载的数据
     public func getDownloadModels() -> [DownloadModel] {
-        let urls: NSMutableArray = NSMutableArray(contentsOfFile: DownloadCacheURLPath) ?? NSMutableArray()
+        let uids: NSMutableArray = NSMutableArray(contentsOfFile: DownloadCacheURLPath) ?? NSMutableArray()
         var models = [DownloadModel]()
-        for url in urls {
-            if let url2 = url as? String {
+        for uid in uids {
+            if let uid2 = uid as? String {
                 let downloadModel = DownloadModel()
-                if let model = downloadModel.getDownloadModel(url: url2) {
+                if let model = downloadModel.getDownloadModel(uid: uid2) {
                     downloadModel.model = model
                     models.append(downloadModel)
                 }
@@ -225,9 +251,9 @@ extension DownloadManager {
     /// 将未完成的下载状态改为.suspended
     public func updateDownloadingStateWithSuspended() {
         for model in getDownloadingModel() {
-            if let url = model.model.url {
+            if let uid = model.model.uid {
                 model.model.state = .suspended
-                DownloadModel().save(url: url, descModel: model.model)
+                DownloadModel().save(uid: uid, descModel: model.model)
             }
         }
     }
@@ -242,9 +268,9 @@ extension DownloadManager {
     }
     
     /// 获取下载完成的文件路径
-    public func getFile(url: String) -> String {
-        guard url.dw_isURL, isExistence(url: url), isCompletion(url: url) else { return "" }
-        return DownloadCachePath + url.dw_getFileName
+    public func getFile(uid: String) -> String {
+        guard isExistence(uid: uid), isCompletion(uid: uid) else { return "" }
+        return DownloadCachePath + uid
     }
     
     /// 获取总缓存大小 单位：字节
@@ -255,9 +281,9 @@ extension DownloadManager {
 
 extension DownloadManager {
     /// 根据url获得对应的下载任务
-    private func getTask(url: String) -> URLSessionDownloadTask? {
-        guard url.dw_isURL else { return nil }
-        return tasks[url.dw_getFileName]
+    private func getTask(uid: String) -> URLSessionDownloadTask? {
+//        guard url.dw_isURL else { return nil }
+        return tasks[uid]
     }
     
     /// 获取对应的下载信息模型
@@ -266,36 +292,40 @@ extension DownloadManager {
     }
     
     private func waitingTask() {
+        debugPrint("waitingTask 继续下一个任务")
         let waitingModel = sessionModels.filter { (key, value) -> Bool in
             return value.states == .waiting
         }
         if let sessionModel = waitingModel.first {
             let model = sessionModel.value
-            if let url = model.model.url {
-                start(url: url)
+            if let uid = model.model.uid {
+                start(uid: uid)
             }
         }
     }
     
-    private func handle(url: String) {
-        guard url.dw_isURL else { return }
-        if let task = getTask(url: url) {
+    private func handle(uid: String) {
+//        guard url.dw_isURL else { return }
+        if let task = getTask(uid: uid) {
             if task.state == .running {
-                cancelTask(url: url)
+                debugPrint("取消下载")
+                cancelTask(uid: uid)
             } else {
                 if let model = getSessionModel(taskIdentifier: task.taskIdentifier), model.states == .waiting {
+                    debugPrint("暂停任务")
                     model.states = .suspended
                 } else {
-                    start(url: url)
+                    debugPrint("开始任务")
+                    start(uid: uid)
                 }
             }
         }
     }
     
     /// 开始下载
-    private func start(url: String) {
-        guard url.dw_isURL else { return }
-        if let task = getTask(url: url) {
+    private func start(uid: String) {
+//        guard url.dw_isURL else { return }
+        if let task = getTask(uid: uid) {
             
             let runningModels = sessionModels.filter { (key, value) -> Bool in
                 return value.states == .start
@@ -303,8 +333,8 @@ extension DownloadManager {
             
             if let model = getSessionModel(taskIdentifier: task.taskIdentifier) {
                 if runningModels.count < maxDownloadCount {
-                    task.resume()
                     model.states = .start
+                    task.resume()
                 } else {
                     model.states = .waiting
                 }
@@ -313,30 +343,30 @@ extension DownloadManager {
     }
     
     /// 创建缓存路径
-    private func path(url: String) -> String {
-        guard url.dw_isURL else { return DownloadCachePath }
+    private func path(uid: String) -> String {
+//        guard url.dw_isURL else { return DownloadCachePath }
         do {
             try FileManager.default.createDirectory(atPath: DownloadCachePath, withIntermediateDirectories: true, attributes: nil)
-            return DownloadCachePath + url.dw_getFileName
+            return DownloadCachePath + uid
         } catch {
             return DownloadCachePath
         }
     }
     
     /// 保存下载的url(取 model 用)
-    private func save(url: String) {
-        guard url.dw_isURL else { return }
-        let urlArr: NSMutableArray = NSMutableArray(contentsOfFile: DownloadCacheURLPath) ?? NSMutableArray()
-        guard !(urlArr.contains(url)) else { return }
-        urlArr.add(url)
-        urlArr.write(toFile: DownloadCacheURLPath, atomically: true)
+    private func save(uid: String) {
+//        guard url.dw_isURL else { return }
+        let uidArr: NSMutableArray = NSMutableArray(contentsOfFile: DownloadCacheURLPath) ?? NSMutableArray()
+        guard !(uidArr.contains(uid)) else { return }
+        uidArr.add(uid)
+        uidArr.write(toFile: DownloadCacheURLPath, atomically: true)
     }
     
     /// 获取已下载文件的大小
-    private func getDownloadSize(url: String) -> Int {
-        guard url.dw_isURL else { return 0 }
+    private func getDownloadSize(uid: String) -> Int {
+//        guard url.dw_isURL else { return 0 }
         do {
-            if let size = try FileManager.default.attributesOfItem(atPath: path(url: url) + ".tmp")[FileAttributeKey.size] as? Int {
+            if let size = try FileManager.default.attributesOfItem(atPath: path(uid: uid) + ".tmp")[FileAttributeKey.size] as? Int {
                 return size
             } else {
                 return 0
@@ -349,7 +379,11 @@ extension DownloadManager {
 
 extension DownloadManager: URLSessionDelegate {
     /// 应用处于后台，所有下载任务完成及URLSession协议调用之后调用
-    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {}
+    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        DispatchQueue.main.async {
+            self.backgroundSessionCompletionHandler!()
+        }
+    }
 }
 
 extension DownloadManager: URLSessionTaskDelegate {
@@ -357,6 +391,7 @@ extension DownloadManager: URLSessionTaskDelegate {
         
         guard let model = sessionModels["\(task.taskIdentifier)"],
             let url = model.model.url,
+            let uid = model.model.uid,
             url.dw_isURL else { return }
         
         guard let response = task.response as? HTTPURLResponse else {
@@ -366,6 +401,7 @@ extension DownloadManager: URLSessionTaskDelegate {
         
         if error != nil || status == 404{
             debugPrint("下载失败")
+            model.failedReason = "404"
             model.states = .failed
         } else {
             debugPrint("下载完成")
@@ -373,7 +409,7 @@ extension DownloadManager: URLSessionTaskDelegate {
         }
         
         // 清除任务
-        tasks.removeValue(forKey: url.dw_getFileName)
+        tasks.removeValue(forKey: uid)
         sessionModels.removeValue(forKey: "\(task.taskIdentifier)")
         
         waitingTask()
@@ -389,87 +425,43 @@ extension DownloadManager: URLSessionDownloadDelegate {
         }
 
         let status = response.statusCode
-        let completeHeader = response.allHeaderFields
-        if(status != 404) {
+//        let completeHeader = response.allHeaderFields
+        if(status == 404) {
+            debugPrint("下载链接错误")
+        }else {
             // 移动文件到指定目录
             debugPrint("开始移动文件")
         }
     }
     // 下载代理方法，监听下载进度
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        
-        guard let model = sessionModels["\(downloadTask.taskIdentifier)"],
-        let url = model.model.url else { return }
-        
-        let receivedSize = totalBytesWritten
-        let expectedSize = totalBytesExpectedToWrite
-        var progress: Double = Double(receivedSize) / Double(expectedSize)
-        
-        model.model.totalLength = expectedSize
         guard let response = downloadTask.response as? HTTPURLResponse else {
             return //something went wrong
         }
+        debugPrint("response status code, %@", response.statusCode, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
         let status = response.statusCode
         if(status == 404) {
-            model.model.progress = 0.0
-            model.model.receivedSize = 0
-        }else {
-            model.model.progress = progress
-            model.model.receivedSize = totalBytesWritten
+            return
         }
-        model.save(url: url, descModel: model.model)
+//        debugPrint("response, %@", response)
+        
+        guard let model = sessionModels["\(downloadTask.taskIdentifier)"],
+            let uid = model.model.uid,
+        let _ = model.model.url else { return }
+        
+        let receivedSize = totalBytesWritten
+        let expectedSize = totalBytesExpectedToWrite
+        let progress: Double = Double(receivedSize) / Double(expectedSize)
+        
+        model.model.totalLength = expectedSize
+        model.model.progress = progress
+        model.model.receivedSize = totalBytesWritten
+        model.save(uid: uid, descModel: model.model)
     }
-    
-    
     
     // 下载代理方法，下载偏移
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
         print("下载偏移")
         // 下载偏移，主要用于暂停续传
     }
-}
-
-extension DownloadManager: URLSessionDataDelegate {
-    /// 接收到响应
-//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-//
-//        guard let model = sessionModels["\(dataTask.taskIdentifier)"],
-//            let stream = model.stream,
-//            let url = model.model.url else { return }
-//
-//        if((response as! HTTPURLResponse).statusCode == 404) {
-//            model.states = .failed
-//            completionHandler(.cancel)
-//            return;
-//        }
-//
-//        // 打开流
-//        stream.open()
-//
-//        // 获得服务器这次请求 返回数据的总长度
-//        model.model.totalLength = Int(response.expectedContentLength) + getDownloadSize(url: url)
-//
-//        model.save(url: url, descModel: model.model)
-//
-//        // 接收这个请求，允许接收服务器的数据
-//        completionHandler(.allow)
-//    }
-    
-    /// 接收到服务器返回的数据
-//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-//        guard let model = sessionModels["\(dataTask.taskIdentifier)"],
-//            let stream = model.stream,
-//            let url = model.model.url else { return }
-//        let bytes = [UInt8](data)
-//        // 写入数据
-//        stream.write(UnsafePointer<UInt8>(bytes), maxLength: data.count)
-//        // 下载进度
-//        let receivedSize = getDownloadSize(url: url)
-//        let expectedSize = model.model.totalLength
-//        let progress: Double = Double(receivedSize) / Double(expectedSize)
-//
-//        model.model.progress = progress
-//        model.model.receivedSize = receivedSize
-//        model.save(url: url, descModel: model.model)
-//    }
 }

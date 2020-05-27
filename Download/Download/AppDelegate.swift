@@ -12,8 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -28,8 +27,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        DownloadManager.default.backgroundSessionCompletionHandler = completionHandler
+    }
+    
+    
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         UIApplication.shared.beginBackgroundTask {}
+//        bgTask = [application beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
+//            // Clean up any unfinished task business by marking where you
+//            // stopped or ending the task outright.
+//            [application endBackgroundTask:bgTask];
+//            bgTask = UIBackgroundTaskInvalid;
+//        }];
+//
+//        // Start the long-running task and return immediately.
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//
+//            // Do the work associated with the task, preferably in chunks.
+//
+//            [application endBackgroundTask:bgTask];
+//            bgTask = UIBackgroundTaskInvalid;
+//        });
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

@@ -16,33 +16,43 @@ class DownloadModel: NSObject {
     public var states: DownloadState = .default {
         didSet {
             model.state = states
-            if let url = model.url {
-                if let proModel = getDownloadModel(url: url) {
+            if let uid = model.uid {
+                if let proModel = getDownloadModel(uid: uid) {
                     model.progress = proModel.progress
                 }
-                save(url: url, descModel: model)
+                save(uid: uid, descModel: model)
+            }
+        }
+    }
+    
+    public var failedReason: String = "" {
+        didSet {
+            model.failedReason = failedReason
+            if let uid = model.uid {
+                save(uid: uid, descModel: model)
             }
         }
     }
     
     public var model: DownloadDescModel = DownloadDescModel()
     
-    public func getDownloadModel(url: String) -> DownloadDescModel? {
-        return DownloadCache<DownloadDescModel>().object(forKey: url)
+    public func getDownloadModel(uid: String) -> DownloadDescModel? {
+        return DownloadCache<DownloadDescModel>().object(forKey: uid)
     }
     
-    public func save(url: String, descModel: DownloadDescModel) {
-        DownloadCache<DownloadDescModel>().setObject(object: descModel, forKey: url)
+    public func save(uid: String, descModel: DownloadDescModel) {
+        DownloadCache<DownloadDescModel>().setObject(object: descModel, forKey: uid)
     }
     
-    public func delete(url: String) {
-        DownloadCache<DownloadDescModel>().removeObiect(forKey: url)
+    public func delete(uid: String) {
+        DownloadCache<DownloadDescModel>().removeObiect(forKey: uid)
     }
 }
 
 class DownloadDescModel: Codable {
     
     /** 必须有的属性 -- 开始 */
+    public var uid: String? /// 资源ID，资源唯一标识，UID不同，即使URL相同，也认为是两个资源
     public var url: String? /// 下载地址
     
     public var resumeDataPath: String? /// 恢复下载时的文件路径
@@ -58,10 +68,13 @@ class DownloadDescModel: Codable {
     }
     
     public var state: DownloadState = .default
+    public var failedReason: String?
     /** 必须有的属性 -- 结束 */
     
     /** 可选属性 -- 开始 */
     /// 例如 下载文件的名称、描述、图片 ...
     public var name: String?
+    /// 用户自定义信息
+    public var userInfo: Dictionary<String, String>?
 }
 
