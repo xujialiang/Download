@@ -394,28 +394,30 @@ extension DownloadManager: URLSessionTaskDelegate {
             let uid = model.model.uid,
             url.dw_isURL else { return }
         
-        guard let response = task.response as? HTTPURLResponse else {
-            return //something went wrong
+        var hasError = false
+        if error != nil {
+            debugPrint("下载失败", error?.localizedDescription ?? "")
+            model.failedReason = error!.localizedDescription
+            hasError = true
         }
-        let status = response.statusCode
-        
-        if error != nil || status != 200{
-            debugPrint("下载失败")
-            if error != nil {
-                model.failedReason = error!.localizedDescription
-            }else {
+        if let response = task.response as? HTTPURLResponse {
+            let status = response.statusCode
+            if status != 200 {
                 model.failedReason = "\(status)"
             }
-            model.states = .failed
-        } else {
+            hasError = true
+        }
+        
+        if !hasError {
             debugPrint("下载完成")
             model.states = .completed
+        }else {
+            model.states = .failed
         }
         
         // 清除任务
         tasks.removeValue(forKey: uid)
         sessionModels.removeValue(forKey: "\(task.taskIdentifier)")
-        
         waitingTask()
     }
 }
