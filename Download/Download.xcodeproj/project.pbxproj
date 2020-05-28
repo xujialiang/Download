@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		556F235E8878DD7A7D7DB903 /* Pods_Download.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC30529F3C0CAC4062DB7EC /* Pods_Download.framework */; };
-		6C0F5437247F97DE00CA152E /* XDownload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91D88C247F8A420007A950 /* XDownload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6C91D894247F8E1D0007A950 /* XDownload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91D88C247F8A420007A950 /* XDownload.framework */; };
+		6C0DD2D3247FFA520036D24D /* XDownload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E279F247FF7E600A138C7 /* XDownload.framework */; };
+		6C0DD2D4247FFA520036D24D /* XDownload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E279F247FF7E600A138C7 /* XDownload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F19216C3A8200DAE65C /* AppDelegate.swift */; };
 		E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F1B216C3A8200DAE65C /* ViewController.swift */; };
 		E1178F1F216C3A8200DAE65C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1178F1D216C3A8200DAE65C /* Main.storyboard */; };
@@ -21,37 +21,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6C0F5435247F97DA00CA152E /* PBXContainerItemProxy */ = {
+		6C1E279E247FF7E600A138C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = "XDownload::XDownload";
-			remoteInfo = XDownload;
-		};
-		6C91D88B247F8A420007A950 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
+			containerPortal = 6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = "XDownload::XDownload::Product";
 			remoteInfo = XDownload;
 		};
-		6C91D88D247F8A420007A950 /* PBXContainerItemProxy */ = {
+		6C1E27A0247FF7E600A138C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
+			containerPortal = 6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = "XDownload::XDownloadTests::Product";
 			remoteInfo = XDownloadTests;
 		};
+		6C1E27A4247FF7EE00A138C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "XDownload::XDownload";
+			remoteInfo = XDownload;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6C91D896247F8E1D0007A950 /* Embed Frameworks */ = {
+		6C0DD2D5247FFA520036D24D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6C0F5437247F97DE00CA152E /* XDownload.framework in Embed Frameworks */,
+				6C0DD2D4247FFA520036D24D /* XDownload.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,7 +61,7 @@
 /* Begin PBXFileReference section */
 		0AC30529F3C0CAC4062DB7EC /* Pods_Download.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Download.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D8540D0AEA89C7870FA6DD /* Pods-Download.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Download.debug.xcconfig"; path = "Target Support Files/Pods-Download/Pods-Download.debug.xcconfig"; sourceTree = "<group>"; };
-		6C91D884247F8A420007A950 /* XDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XDownload.xcodeproj; path = XDownload/XDownload.xcodeproj; sourceTree = "<group>"; };
+		6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XDownload.xcodeproj; path = XDownload/XDownload.xcodeproj; sourceTree = "<group>"; };
 		E1178F16216C3A8200DAE65C /* i虾仔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "i虾仔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1178F19216C3A8200DAE65C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1178F1B216C3A8200DAE65C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				556F235E8878DD7A7D7DB903 /* Pods_Download.framework in Frameworks */,
-				6C91D894247F8E1D0007A950 /* XDownload.framework in Frameworks */,
+				6C0DD2D3247FFA520036D24D /* XDownload.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,11 +105,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6C91D885247F8A420007A950 /* Products */ = {
+		6C1E2798247FF7E600A138C7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C91D88C247F8A420007A950 /* XDownload.framework */,
-				6C91D88E247F8A420007A950 /* XDownloadTests.xctest */,
+				6C1E279F247FF7E600A138C7 /* XDownload.framework */,
+				6C1E27A1247FF7E600A138C7 /* XDownloadTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,7 +117,7 @@
 		E1178F0D216C3A8200DAE65C = {
 			isa = PBXGroup;
 			children = (
-				6C91D884247F8A420007A950 /* XDownload.xcodeproj */,
+				6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */,
 				E1178F18216C3A8200DAE65C /* Download */,
 				E1178F17216C3A8200DAE65C /* Products */,
 				1BC8DD7CA73272FD6EF877E1 /* Pods */,
@@ -161,12 +161,12 @@
 				E1178F13216C3A8200DAE65C /* Frameworks */,
 				E1178F14216C3A8200DAE65C /* Resources */,
 				FC3E96A5057CFFD39EA50F76 /* [CP] Embed Pods Frameworks */,
-				6C91D896247F8E1D0007A950 /* Embed Frameworks */,
+				6C0DD2D5247FFA520036D24D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6C0F5436247F97DA00CA152E /* PBXTargetDependency */,
+				6C1E27A5247FF7EE00A138C7 /* PBXTargetDependency */,
 			);
 			name = Download;
 			productName = Download;
@@ -201,8 +201,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 6C91D885247F8A420007A950 /* Products */;
-					ProjectRef = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
+					ProductGroup = 6C1E2798247FF7E600A138C7 /* Products */;
+					ProjectRef = 6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -213,18 +213,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6C91D88C247F8A420007A950 /* XDownload.framework */ = {
+		6C1E279F247FF7E600A138C7 /* XDownload.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = XDownload.framework;
-			remoteRef = 6C91D88B247F8A420007A950 /* PBXContainerItemProxy */;
+			remoteRef = 6C1E279E247FF7E600A138C7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6C91D88E247F8A420007A950 /* XDownloadTests.xctest */ = {
+		6C1E27A1247FF7E600A138C7 /* XDownloadTests.xctest */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
+			fileType = file;
 			path = XDownloadTests.xctest;
-			remoteRef = 6C91D88D247F8A420007A950 /* PBXContainerItemProxy */;
+			remoteRef = 6C1E27A0247FF7E600A138C7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -300,10 +300,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6C0F5436247F97DA00CA152E /* PBXTargetDependency */ = {
+		6C1E27A5247FF7EE00A138C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = XDownload;
-			targetProxy = 6C0F5435247F97DA00CA152E /* PBXContainerItemProxy */;
+			targetProxy = 6C1E27A4247FF7EE00A138C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

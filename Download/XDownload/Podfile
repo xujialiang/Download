@@ -6,10 +6,3 @@ use_frameworks!
 pod 'Cache'
 
 end
-target 'Demo' do
-use_frameworks!
-
-pod 'MJRefresh'
-pod 'SnapKit'
-
-end
