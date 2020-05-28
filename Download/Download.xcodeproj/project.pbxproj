@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		556F235E8878DD7A7D7DB903 /* Pods_Download.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC30529F3C0CAC4062DB7EC /* Pods_Download.framework */; };
+		6C0F5437247F97DE00CA152E /* XDownload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91D88C247F8A420007A950 /* XDownload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C91D894247F8E1D0007A950 /* XDownload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91D88C247F8A420007A950 /* XDownload.framework */; };
-		6C91D895247F8E1D0007A950 /* XDownload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91D88C247F8A420007A950 /* XDownload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F19216C3A8200DAE65C /* AppDelegate.swift */; };
 		E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F1B216C3A8200DAE65C /* ViewController.swift */; };
 		E1178F1F216C3A8200DAE65C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1178F1D216C3A8200DAE65C /* Main.storyboard */; };
@@ -21,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6C0F5435247F97DA00CA152E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "XDownload::XDownload";
+			remoteInfo = XDownload;
+		};
 		6C91D88B247F8A420007A950 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
@@ -35,13 +42,6 @@
 			remoteGlobalIDString = "XDownload::XDownloadTests::Product";
 			remoteInfo = XDownloadTests;
 		};
-		6C91D88F247F8A470007A950 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = "XDownload::XDownload";
-			remoteInfo = XDownload;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,7 +51,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6C91D895247F8E1D0007A950 /* XDownload.framework in Embed Frameworks */,
+				6C0F5437247F97DE00CA152E /* XDownload.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +166,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				6C91D890247F8A470007A950 /* PBXTargetDependency */,
+				6C0F5436247F97DA00CA152E /* PBXTargetDependency */,
 			);
 			name = Download;
 			productName = Download;
@@ -300,10 +300,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6C91D890247F8A470007A950 /* PBXTargetDependency */ = {
+		6C0F5436247F97DA00CA152E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = XDownload;
-			targetProxy = 6C91D88F247F8A470007A950 /* PBXContainerItemProxy */;
+			targetProxy = 6C0F5435247F97DA00CA152E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -459,7 +459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.xujialiang.DownloadManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = DownloadManagerDev;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -480,7 +480,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.xujialiang.DownloadManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = DownloadManagerDev;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -96,11 +96,12 @@ extension DownloadManager {
                 
                 let resumeData = try Data.init(contentsOf: URL(fileURLWithPath: tmpFilePath))
                 let task = session.downloadTask(withResumeData: resumeData)
+                sessionModels["\(task.taskIdentifier)"] = model
                 task.resume()
                 // 保存任务
                 tasks[uid] = task
                 model.states = .waiting
-                sessionModels["\(task.taskIdentifier)"] = model
+                
                 save(uid: uid)
                 start(uid: uid)
             }catch{}
@@ -114,14 +115,15 @@ extension DownloadManager {
 //            request.setValue("bytes=\(getDownloadSize(uid: uid))-", forHTTPHeaderField: "Range")
             // 创建一个Data任务
             let task = session.downloadTask(with: request)
+            // sessionModels 必须使用taskIdentifier
+            // 因为在URLSessionTaskDelegate的回调中，返回的是task，要想找到task对应的model，只能用taskIdentifier作为key
+            sessionModels["\(task.taskIdentifier)"] = model
             task.resume()
             debugPrint("taskIdentifier", task.taskIdentifier)
             // 保存任务
             tasks[uid] = task
             model.states = .waiting
-            // sessionModels 必须使用taskIdentifier
-            // 因为在URLSessionTaskDelegate的回调中，返回的是task，要想找到task对应的model，只能用taskIdentifier作为key
-            sessionModels["\(task.taskIdentifier)"] = model
+            
             save(uid: uid)
             start(uid: uid)
         }
@@ -378,7 +380,7 @@ extension DownloadManager {
 
 extension DownloadManager: URLSessionDelegate {
     /// 应用处于后台，所有下载任务完成及URLSession协议调用之后调用
-    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+    public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         DispatchQueue.main.async {
             if let handler = self.backgroundSessionCompletionHandler {
                 debugPrint("backgroundSessionCompletionHandler")
@@ -389,7 +391,7 @@ extension DownloadManager: URLSessionDelegate {
 }
 
 extension DownloadManager: URLSessionTaskDelegate {
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
         guard let model = sessionModels["\(task.taskIdentifier)"],
             let url = model.model.url,
@@ -466,7 +468,7 @@ extension DownloadManager: URLSessionDownloadDelegate {
         }
     }
     // 下载代理方法，监听下载进度
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         guard let response = downloadTask.response as? HTTPURLResponse else {
             return //something went wrong
         }
@@ -492,7 +494,7 @@ extension DownloadManager: URLSessionDownloadDelegate {
     }
     
     // 下载代理方法，下载偏移
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
         print("下载偏移")
         // 下载偏移，主要用于暂停续传
     }
