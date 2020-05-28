@@ -195,8 +195,8 @@ extension DownloadManager {
                 cancelTask(uid: uid)
             }
         }
-//        sessionModels.removeAll()
-//        tasks.removeAll()
+        sessionModels.removeAll()
+        tasks.removeAll()
     }
     
     /// 根据url删除资源
