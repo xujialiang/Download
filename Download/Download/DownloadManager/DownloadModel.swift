@@ -10,6 +10,8 @@ import UIKit
 
 /// 进度通知
 let DownloadProgressNotification: Notification.Name = Notification.Name("DownloadProgressNotification")
+// 下载状态通知
+let DownloadStatusNotification: Notification.Name = Notification.Name("DownloadStatusNotification")
 
 class DownloadModel: NSObject {
     
@@ -67,7 +69,11 @@ class DownloadDescModel: Codable {
         }
     }
     
-    public var state: DownloadState = .default
+    public var state: DownloadState = .default {
+        didSet {
+            NotificationCenter.default.post(name: DownloadStatusNotification, object: self)
+        }
+    }
     public var failedReason: String?
     /** 必须有的属性 -- 结束 */
     
