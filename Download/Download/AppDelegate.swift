@@ -48,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         debugPrint("杀死程序")
+        DownloadManager.default.cancelAllTask()
+        debugPrint("取消了所有任务")
     }
 }
 

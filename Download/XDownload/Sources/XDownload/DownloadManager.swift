@@ -26,6 +26,9 @@ let DownloadCacheURLPath = DownloadHomeDirectory + "URL.plist"
 /// 保存下载文件的model路径
 let DownloadCacheModelPath = "DownloadCache/DownloadModelCache"
 
+//创建一个信号量，初始值为1
+let semaphoreSignal = DispatchSemaphore(value: 0)
+
 public class DownloadManager: NSObject {
 
     public static let `default` = DownloadManager()
@@ -41,8 +44,8 @@ public class DownloadManager: NSObject {
         configuration.isDiscretionary = true
         configuration.timeoutIntervalForRequest = .infinity
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        queue.maxConcurrentOperationCount = 10
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: queue)
         return session
     }()
     
@@ -93,7 +96,6 @@ extension DownloadManager {
             let tmpFilePath = self.path(uid: uid) + ".tmp"
             debugPrint("存在缓存文件", tmpFilePath)
             do {
-                
                 let resumeData = try Data.init(contentsOf: URL(fileURLWithPath: tmpFilePath))
                 let task = session.downloadTask(withResumeData: resumeData)
                 sessionModels["\(task.taskIdentifier)"] = model
@@ -112,7 +114,7 @@ extension DownloadManager {
             // 忽略本地缓存，代理服务器以及其他中介，直接请求源服务端
             request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
             // 设置请求头
-//            request.setValue("bytes=\(getDownloadSize(uid: uid))-", forHTTPHeaderField: "Range")
+            request.setValue("bytes=\(getDownloadSize(uid: uid))-", forHTTPHeaderField: "Range")
             // 创建一个Data任务
             let task = session.downloadTask(with: request)
             // sessionModels 必须使用taskIdentifier
@@ -163,33 +165,38 @@ extension DownloadManager {
     public func cancelTask(uid: String) {
 //        guard url.dw_isURL else { return }
         if let task = getTask(uid: uid) {
+            debugPrint("暂停任务", uid)
             task.suspend()
             task.cancel(byProducingResumeData: { data in
+                debugPrint("取消下载", uid)
                 if let model = self.getSessionModel(taskIdentifier: task.taskIdentifier) {
-                    model.states = .suspended
-                    model.model.resumeDataPath = self.path(uid: model.model.uid!) + ".tmp"
                     do {
+                        model.model.resumeDataPath = self.path(uid: model.model.uid!) + ".tmp"
                         try data?.write(to: URL(fileURLWithPath: model.model.resumeDataPath!))
-                    }catch {}
+                        model.states = .suspended
+                    }catch {
+                        debugPrint("缓存出错", error)
+                    }
                     self.sessionModels.removeValue(forKey: "\(task.taskIdentifier)")
                     self.tasks.removeValue(forKey: uid)
                 }
                 self.waitingTask()
+                semaphoreSignal.signal()
             });
+            semaphoreSignal.wait()
         }
     }
     
     /// 取消/暂停所有任务
     public func cancelAllTask() {
-        for (_, task) in tasks.values.enumerated() {
-            task.suspend()
-            task.cancel()
-        }
-        tasks.removeAll()
+        
         for (_, sessionModel) in sessionModels.values.enumerated() {
-            sessionModel.states = .suspended
+            if let uid = sessionModel.model.uid {
+                cancelTask(uid: uid)
+            }
         }
-        sessionModels.removeAll()
+//        sessionModels.removeAll()
+//        tasks.removeAll()
     }
     
     /// 根据url删除资源
@@ -416,8 +423,14 @@ extension DownloadManager: URLSessionTaskDelegate {
             model.states = .completed
             
         }else {
-            debugPrint("下载失败", model.failedReason)
-            model.states = .failed
+            if error?.localizedDescription == "cancelled" {
+                debugPrint("下载取消", model.failedReason)
+                model.states = .suspended
+            } else {
+                debugPrint("下载失败", model.failedReason)
+                model.states = .failed
+            }
+            
         }
         
         // 清除任务
@@ -481,7 +494,7 @@ extension DownloadManager: URLSessionDownloadDelegate {
         
         guard let model = sessionModels["\(downloadTask.taskIdentifier)"],
             let uid = model.model.uid,
-        let _ = model.model.url else { return }
+            let _ = model.model.url else { downloadTask.suspend(); return }
         
         let receivedSize = totalBytesWritten
         let expectedSize = totalBytesExpectedToWrite
