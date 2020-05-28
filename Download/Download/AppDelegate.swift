@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = ViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        window?.rootViewController = nav
-        window?.makeKeyAndVisible()
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        let vc = ViewController()
+//        let nav = UINavigationController(rootViewController: vc)
+//        window?.rootViewController = nav
+//        window?.makeKeyAndVisible()
         
         DownloadManager.default.maxDownloadCount = 3
         DownloadManager.default.updateDownloadingStateWithSuspended()

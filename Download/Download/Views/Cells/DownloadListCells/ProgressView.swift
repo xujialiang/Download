@@ -13,7 +13,7 @@ class ProgressView: UIView {
     
     private lazy var bgView: UIView = {
         let bgView = UIView()
-        bgView.backgroundColor = UIColor.gray
+        bgView.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1)
         return bgView
     }()
     
@@ -21,12 +21,6 @@ class ProgressView: UIView {
         let progressView = UIView()
         progressView.backgroundColor = UIColor.green
         return progressView
-    }()
-    
-    private lazy var progressLabel: UILabel = {
-        let progressLabel = UILabel()
-        progressLabel.textColor = UIColor.black
-        return progressLabel
     }()
 
     override init(frame: CGRect) {
@@ -36,7 +30,6 @@ class ProgressView: UIView {
     }
     
     func update(model: DownloadDescModel) {
-        progressLabel.text = "\(model.progress)"
         debugPrint("progress: \(model.progress) -- receivedSize: \(model.receivedSize) -- totalLength: \(model.totalLength) -- failedReason: \(model.failedReason ?? "")")
         
         let width = frame.size.width * CGFloat(model.progress)
@@ -55,7 +48,6 @@ extension ProgressView {
     private func addSubViews() {
         addSubview(bgView)
         addSubview(progressView)
-        addSubview(progressLabel)
         
         bgView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -64,10 +56,6 @@ extension ProgressView {
         progressView.snp.makeConstraints { (make) in
             make.left.top.bottom.equalToSuperview()
             make.width.equalTo(0)
-        }
-        
-        progressLabel.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
         }
     }
 }

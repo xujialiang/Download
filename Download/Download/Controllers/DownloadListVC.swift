@@ -1,50 +1,37 @@
 //
-//  ViewController.swift
+//  DownloadListVC.swift
 //  Download
 //
-//  Created by 张书孟 on 2018/10/9.
-//  Copyright © 2018年 zsm. All rights reserved.
+//  Created by 徐佳良 on 2020/5/28.
+//  Copyright © 2020 zsm. All rights reserved.
 //
 
 import UIKit
 import XDownload
 
-class ViewController: UIViewController {
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 64, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 64), style: .plain)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 100
-        tableView.register(ViewTableViewCell.self, forCellReuseIdentifier: "ViewTableViewCell")
-        return tableView
-    }()
-    
+class DownloadListVC: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
     private var dataSource: [DownloadModel] = [DownloadModel]()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addNotification()
+        // Do any additional setup after loading the view.
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dataSource.removeAll()
         loadData()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-//        DownloadManager.default.cancelAllTask()
-    }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func addNotification() {
+        // 进度通知
+        NotificationCenter.default.addObserver(self, selector: #selector(downLoadProgress(notification:)), name: DownloadProgressNotification, object: nil)
         
-        addNotification()
-        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "下载管理", style: .plain, target: self, action: #selector(nextClick))
-        navigationItem.title = "i虾仔"
-        debugPrint(NSHomeDirectory())
-        
-        view.addSubview(tableView)
-        
-        loadData()
+        // 任务状态通知
+        NotificationCenter.default.addObserver(self, selector: #selector(downLoadStatus(notification:)), name: DownloadStatusNotification, object: nil)
     }
     
     private func loadData() {
@@ -69,7 +56,7 @@ class ViewController: UIViewController {
         model4.model.url = "http://www.hangge.com/blog_uploads/201709/2017091219324377713.zip"
         
         let model5 = DownloadModel()
-        model5.model.name = "测试5.rar"
+        model5.model.name = "测试5.mp4"
         model5.model.uid = "5"
         model5.model.url = "http://www.runoob.com/try/demo_source/movie.mp4"
         
@@ -84,7 +71,7 @@ class ViewController: UIViewController {
         model7.model.url = "https://download.sketchapp.com/sketch-51.1-57501.zip"
         
         let model8 = DownloadModel()
-        model8.model.name = "测试8.zip"
+        model8.model.name = "测试8.ara"
         model8.model.uid = "8"
         model8.model.url = "http://static.realm.io/downloads/swift/realm-swift-3.4.0.zip"
         
@@ -106,42 +93,45 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     
-    private func addNotification() {
-        // 进度通知
-        NotificationCenter.default.addObserver(self, selector: #selector(downLoadProgress(notification:)), name: DownloadProgressNotification, object: nil)
-    }
-    
-    @objc private func nextClick() {
-        navigationController?.pushViewController(DownloadViewController(), animated: true)
-    }
-    
     @objc private func downLoadProgress(notification: Notification) {
         if let model = notification.object as? DownloadDescModel {
             for (index, descModel) in dataSource.enumerated() {
-                if model.url == descModel.model.url {
+                if model.uid == descModel.model.uid {
                     DispatchQueue.main.async { [weak self] in
                         guard let `self` = self else { return }
-                        if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? ViewTableViewCell {
-                            cell.updateView(model: model)
+                        if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? DownloadListCell {
+                            cell.bindData(model: descModel)
                         }
                     }
                 }
             }
         }
     }
+    
+    @objc private func downLoadStatus(notification: Notification) {
+        if let model = notification.object as? DownloadDescModel {
+            
+        }
+    }
+
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
+extension DownloadListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: ViewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ViewTableViewCell") as! ViewTableViewCell
+        let cell: DownloadListCell = tableView.dequeueReusableCell(withIdentifier: "cellid") as! DownloadListCell
         let model = dataSource[indexPath.row]
-        cell.update(model: model)
+        cell.bindData(model: model)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 78
+    }
 }
+
