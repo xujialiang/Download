@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import XDownload
 
 class DownloadViewController: UIViewController {
 
@@ -22,7 +23,7 @@ class DownloadViewController: UIViewController {
     
     private var dataSource: [DownloadModel] = [DownloadModel]()
     
-    private var page: Int = 0
+    private var page: Int = 1
     
     deinit {
         debugPrint("deinit - DownloadViewController")

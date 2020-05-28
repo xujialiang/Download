@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		556F235E8878DD7A7D7DB903 /* Pods_Download.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC30529F3C0CAC4062DB7EC /* Pods_Download.framework */; };
+		6C91D894247F8E1D0007A950 /* XDownload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91D88C247F8A420007A950 /* XDownload.framework */; };
+		6C91D895247F8E1D0007A950 /* XDownload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C91D88C247F8A420007A950 /* XDownload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F19216C3A8200DAE65C /* AppDelegate.swift */; };
 		E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F1B216C3A8200DAE65C /* ViewController.swift */; };
 		E1178F1F216C3A8200DAE65C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1178F1D216C3A8200DAE65C /* Main.storyboard */; };
@@ -15,16 +17,51 @@
 		E1178F24216C3A8300DAE65C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1178F22216C3A8300DAE65C /* LaunchScreen.storyboard */; };
 		E1641765216DBA7C00D56120 /* ViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1641764216DBA7C00D56120 /* ViewTableViewCell.swift */; };
 		E1641767216E024700D56120 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1641766216E024700D56120 /* DownloadViewController.swift */; };
-		E1770A7E21747F88008464AB /* Download+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1770A7A21747F87008464AB /* Download+Extension.swift */; };
-		E1770A7F21747F88008464AB /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1770A7B21747F87008464AB /* DownloadManager.swift */; };
-		E1770A8021747F88008464AB /* DownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1770A7C21747F87008464AB /* DownloadModel.swift */; };
-		E1770A8221747FB4008464AB /* DownloadCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1770A8121747FB4008464AB /* DownloadCache.swift */; };
 		E1770A84217480B1008464AB /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1770A83217480B1008464AB /* ProgressView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6C91D88B247F8A420007A950 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "XDownload::XDownload::Product";
+			remoteInfo = XDownload;
+		};
+		6C91D88D247F8A420007A950 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "XDownload::XDownloadTests::Product";
+			remoteInfo = XDownloadTests;
+		};
+		6C91D88F247F8A470007A950 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "XDownload::XDownload";
+			remoteInfo = XDownload;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6C91D896247F8E1D0007A950 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6C91D895247F8E1D0007A950 /* XDownload.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0AC30529F3C0CAC4062DB7EC /* Pods_Download.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Download.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D8540D0AEA89C7870FA6DD /* Pods-Download.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Download.debug.xcconfig"; path = "Target Support Files/Pods-Download/Pods-Download.debug.xcconfig"; sourceTree = "<group>"; };
+		6C91D884247F8A420007A950 /* XDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XDownload.xcodeproj; path = XDownload/XDownload.xcodeproj; sourceTree = "<group>"; };
 		E1178F16216C3A8200DAE65C /* Download.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Download.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1178F19216C3A8200DAE65C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1178F1B216C3A8200DAE65C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,10 +71,6 @@
 		E1178F25216C3A8300DAE65C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1641764216DBA7C00D56120 /* ViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTableViewCell.swift; sourceTree = "<group>"; };
 		E1641766216E024700D56120 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
-		E1770A7A21747F87008464AB /* Download+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Download+Extension.swift"; sourceTree = "<group>"; };
-		E1770A7B21747F87008464AB /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
-		E1770A7C21747F87008464AB /* DownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadModel.swift; sourceTree = "<group>"; };
-		E1770A8121747FB4008464AB /* DownloadCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCache.swift; sourceTree = "<group>"; };
 		E1770A83217480B1008464AB /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		F3E4DE8AADD67D80CE4BB10C /* Pods-Download.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Download.release.xcconfig"; path = "Target Support Files/Pods-Download/Pods-Download.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				556F235E8878DD7A7D7DB903 /* Pods_Download.framework in Frameworks */,
+				6C91D894247F8E1D0007A950 /* XDownload.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,9 +105,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6C91D885247F8A420007A950 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6C91D88C247F8A420007A950 /* XDownload.framework */,
+				6C91D88E247F8A420007A950 /* XDownloadTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E1178F0D216C3A8200DAE65C = {
 			isa = PBXGroup;
 			children = (
+				6C91D884247F8A420007A950 /* XDownload.xcodeproj */,
 				E1178F18216C3A8200DAE65C /* Download */,
 				E1178F17216C3A8200DAE65C /* Products */,
 				1BC8DD7CA73272FD6EF877E1 /* Pods */,
@@ -92,7 +136,6 @@
 		E1178F18216C3A8200DAE65C /* Download */ = {
 			isa = PBXGroup;
 			children = (
-				E1770A7821747F87008464AB /* DownloadManager */,
 				E1178F19216C3A8200DAE65C /* AppDelegate.swift */,
 				E1178F1B216C3A8200DAE65C /* ViewController.swift */,
 				E1641766216E024700D56120 /* DownloadViewController.swift */,
@@ -104,17 +147,6 @@
 				E1178F25216C3A8300DAE65C /* Info.plist */,
 			);
 			path = Download;
-			sourceTree = "<group>";
-		};
-		E1770A7821747F87008464AB /* DownloadManager */ = {
-			isa = PBXGroup;
-			children = (
-				E1770A7B21747F87008464AB /* DownloadManager.swift */,
-				E1770A7C21747F87008464AB /* DownloadModel.swift */,
-				E1770A8121747FB4008464AB /* DownloadCache.swift */,
-				E1770A7A21747F87008464AB /* Download+Extension.swift */,
-			);
-			path = DownloadManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,10 +161,12 @@
 				E1178F13216C3A8200DAE65C /* Frameworks */,
 				E1178F14216C3A8200DAE65C /* Resources */,
 				FC3E96A5057CFFD39EA50F76 /* [CP] Embed Pods Frameworks */,
+				6C91D896247F8E1D0007A950 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6C91D890247F8A470007A950 /* PBXTargetDependency */,
 			);
 			name = Download;
 			productName = Download;
@@ -165,12 +199,35 @@
 			mainGroup = E1178F0D216C3A8200DAE65C;
 			productRefGroup = E1178F17216C3A8200DAE65C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6C91D885247F8A420007A950 /* Products */;
+					ProjectRef = 6C91D884247F8A420007A950 /* XDownload.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E1178F15216C3A8200DAE65C /* Download */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6C91D88C247F8A420007A950 /* XDownload.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XDownload.framework;
+			remoteRef = 6C91D88B247F8A420007A950 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6C91D88E247F8A420007A950 /* XDownloadTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XDownloadTests.xctest;
+			remoteRef = 6C91D88D247F8A420007A950 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E1178F14216C3A8200DAE65C /* Resources */ = {
@@ -234,17 +291,21 @@
 			files = (
 				E1641765216DBA7C00D56120 /* ViewTableViewCell.swift in Sources */,
 				E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */,
-				E1770A7F21747F88008464AB /* DownloadManager.swift in Sources */,
-				E1770A8221747FB4008464AB /* DownloadCache.swift in Sources */,
 				E1641767216E024700D56120 /* DownloadViewController.swift in Sources */,
-				E1770A8021747F88008464AB /* DownloadModel.swift in Sources */,
-				E1770A7E21747F88008464AB /* Download+Extension.swift in Sources */,
 				E1770A84217480B1008464AB /* ProgressView.swift in Sources */,
 				E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6C91D890247F8A470007A950 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = XDownload;
+			targetProxy = 6C91D88F247F8A470007A950 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E1178F1D216C3A8200DAE65C /* Main.storyboard */ = {

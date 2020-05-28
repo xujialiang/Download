@@ -8,7 +8,7 @@
 
 import Cache
 
-class DownloadCache<T: Codable> {
+public class DownloadCache<T: Codable> {
     
     var storage: Storage<T>?
     

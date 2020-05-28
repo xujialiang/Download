@@ -9,11 +9,11 @@
 import UIKit
 
 /// 进度通知
-let DownloadProgressNotification: Notification.Name = Notification.Name("DownloadProgressNotification")
+public let DownloadProgressNotification: Notification.Name = Notification.Name("DownloadProgressNotification")
 // 下载状态通知
-let DownloadStatusNotification: Notification.Name = Notification.Name("DownloadStatusNotification")
+public let DownloadStatusNotification: Notification.Name = Notification.Name("DownloadStatusNotification")
 
-class DownloadModel: NSObject {
+public class DownloadModel: NSObject {
     
     public var states: DownloadState = .default {
         didSet {
@@ -51,7 +51,7 @@ class DownloadModel: NSObject {
     }
 }
 
-class DownloadDescModel: Codable {
+public class DownloadDescModel: Codable {
     
     /** 必须有的属性 -- 开始 */
     public var uid: String? /// 资源ID，资源唯一标识，UID不同，即使URL相同，也认为是两个资源

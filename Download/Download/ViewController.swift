@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XDownload
 
 class ViewController: UIViewController {
     

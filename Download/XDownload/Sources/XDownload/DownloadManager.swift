@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum DownloadState: Int, Codable {
+public enum DownloadState: Int, Codable {
     case `default` /// 默认
     case start /// 下载中
     case waiting /// 等待
@@ -26,7 +26,7 @@ let DownloadCacheURLPath = DownloadHomeDirectory + "URL.plist"
 /// 保存下载文件的model路径
 let DownloadCacheModelPath = "DownloadCache/DownloadModelCache"
 
-class DownloadManager: NSObject {
+public class DownloadManager: NSObject {
 
     public static let `default` = DownloadManager()
     
@@ -96,6 +96,7 @@ extension DownloadManager {
                 
                 let resumeData = try Data.init(contentsOf: URL(fileURLWithPath: tmpFilePath))
                 let task = session.downloadTask(withResumeData: resumeData)
+                task.resume()
                 // 保存任务
                 tasks[uid] = task
                 model.states = .waiting
@@ -113,6 +114,7 @@ extension DownloadManager {
 //            request.setValue("bytes=\(getDownloadSize(uid: uid))-", forHTTPHeaderField: "Range")
             // 创建一个Data任务
             let task = session.downloadTask(with: request)
+            task.resume()
             debugPrint("taskIdentifier", task.taskIdentifier)
             // 保存任务
             tasks[uid] = task
@@ -410,6 +412,7 @@ extension DownloadManager: URLSessionTaskDelegate {
         if !hasError {
             debugPrint("下载完成")
             model.states = .completed
+            
         }else {
             debugPrint("下载失败", model.failedReason)
             model.states = .failed
@@ -424,7 +427,7 @@ extension DownloadManager: URLSessionTaskDelegate {
 
 extension DownloadManager: URLSessionDownloadDelegate {
     
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         print("下载结束")
         guard let response = downloadTask.response as? HTTPURLResponse else {
             return //something went wrong

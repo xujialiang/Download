@@ -1,0 +1,15 @@
+platform :ios, '9.0'
+
+target 'XDownload' do
+use_frameworks!
+
+pod 'Cache'
+
+end
+target 'Demo' do
+use_frameworks!
+
+pod 'MJRefresh'
+pod 'SnapKit'
+
+end
