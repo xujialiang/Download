@@ -36,15 +36,30 @@ class DownloadListCell: UITableViewCell {
         self.icon.image = iconImage(ext: ext)
         
         if let uid = model.model.uid, let model1 = model.getDownloadModel(uid: uid) {
-            progressView.update(model: model1)
-            lbl_taskStatus.text = state(state: model1.state)
+            if progressView != nil {
+                progressView.update(model: model1)
+            }
+            
+            if lbl_taskStatus != nil {
+                lbl_taskStatus.text = state(state: model1.state)
+            }else {
+                progressView.isHidden = true
+            }
+            
             let receivedSize = String(format: "%.2f", Float(model1.receivedSize)/1024/1024)
             let totalLength = String(format: "%.2f", Float(model1.totalLength)/1024/1024)
             
             self.downloadedInfo.text = "\(receivedSize) MB / \(totalLength) MB"
         } else {
-            progressView.update(model: model.model)
-            lbl_taskStatus.text = state(state: model.model.state)
+            if progressView != nil {
+                progressView.update(model: model.model)
+            }
+            if lbl_taskStatus != nil {
+                lbl_taskStatus.text = state(state: model.model.state)
+            }else {
+                progressView.isHidden = true
+            }
+            
             let receivedSize = String(format: "%.2f", Float(model.model.receivedSize)/1024)
             let totalLength = String(format: "%.2f", Float(model.model.totalLength)/1024)
             

@@ -113,7 +113,7 @@ class DownloadListVC: UIViewController {
     
     @objc private func downLoadStatus(notification: Notification) {
         if let model = notification.object as? DownloadDescModel {
-            
+            self.loadData()
         }
     }
 

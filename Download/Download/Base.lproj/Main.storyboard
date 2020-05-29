@@ -241,7 +241,7 @@
                         <sections>
                             <tableViewSection id="LkR-sI-1H5">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="9Zg-gf-bh1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="70" id="9Zg-gf-bh1">
                                         <rect key="frame" x="0.0" y="102" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Zg-gf-bh1" id="vwo-JW-4Kh">
@@ -289,7 +289,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7e9-oC-SFv">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellid" rowHeight="78" id="QPi-Wm-SNr" customClass="DownloadListCell" customModule="i虾仔" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellid" rowHeight="78" id="QPi-Wm-SNr" customClass="DownloadListCell" customModule="i虾仔" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QPi-Wm-SNr" id="Oak-WR-zaI">
@@ -304,56 +304,15 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载中..." textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZs-xe-zCm">
-                                                    <rect key="frame" x="72" y="17" width="280" height="24"/>
+                                                    <rect key="frame" x="72" y="17" width="66" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="1jp-o0-Pz1"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SK4-Cb-urV">
-                                                    <rect key="frame" x="360" y="17" width="44" height="44"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSy-nj-tnz">
-                                                            <rect key="frame" x="0.0" y="36" width="44" height="12"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="12" id="Fea-ld-f7Q"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                                            <color key="textColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGz-Oa-esS">
-                                                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                                            <connections>
-                                                                <action selector="didClickBtn:" destination="QPi-Wm-SNr" eventType="touchUpInside" id="Ga9-G9-uFM"/>
-                                                            </connections>
-                                                        </button>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" highlightedImage="pause" translatesAutoresizingMaskIntoConstraints="NO" id="x5l-S3-OOe">
-                                                            <rect key="frame" x="12" y="12" width="20" height="20"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="20" id="Klm-gI-VPQ"/>
-                                                                <constraint firstAttribute="height" constant="20" id="bjn-Vg-Ft7"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                    <constraints>
-                                                        <constraint firstItem="zGz-Oa-esS" firstAttribute="leading" secondItem="SK4-Cb-urV" secondAttribute="leading" id="4ZB-FW-O7f"/>
-                                                        <constraint firstItem="zGz-Oa-esS" firstAttribute="top" secondItem="SK4-Cb-urV" secondAttribute="top" id="7hu-DO-G0c"/>
-                                                        <constraint firstItem="x5l-S3-OOe" firstAttribute="centerX" secondItem="SK4-Cb-urV" secondAttribute="centerX" id="Clw-pP-Rbl"/>
-                                                        <constraint firstAttribute="width" constant="44" id="Hl3-Vf-bzy"/>
-                                                        <constraint firstItem="DSy-nj-tnz" firstAttribute="leading" secondItem="SK4-Cb-urV" secondAttribute="leading" id="MoP-R0-0sO"/>
-                                                        <constraint firstItem="x5l-S3-OOe" firstAttribute="centerY" secondItem="SK4-Cb-urV" secondAttribute="centerY" id="UnA-W4-kXf"/>
-                                                        <constraint firstAttribute="trailing" secondItem="zGz-Oa-esS" secondAttribute="trailing" id="WEs-wz-aOt"/>
-                                                        <constraint firstAttribute="height" constant="44" id="Wa1-sb-ZtX"/>
-                                                        <constraint firstAttribute="bottom" secondItem="zGz-Oa-esS" secondAttribute="bottom" id="eZN-vQ-v6D"/>
-                                                        <constraint firstAttribute="bottom" secondItem="DSy-nj-tnz" secondAttribute="bottom" constant="-4" id="gtx-AD-MdL"/>
-                                                        <constraint firstAttribute="trailing" secondItem="DSy-nj-tnz" secondAttribute="trailing" id="vru-hg-5GM"/>
-                                                    </constraints>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 MB / 0 MB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRl-w5-reg">
-                                                    <rect key="frame" x="72" y="43" width="280" height="21"/>
+                                                    <rect key="frame" x="72" y="43" width="64.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="YBk-Z3-IGr"/>
                                                     </constraints>
@@ -365,21 +324,15 @@
                                             <constraints>
                                                 <constraint firstItem="tRl-w5-reg" firstAttribute="leading" secondItem="lag-N9-mWJ" secondAttribute="trailing" constant="8" id="5F4-05-BeS"/>
                                                 <constraint firstItem="FZs-xe-zCm" firstAttribute="top" secondItem="Oak-WR-zaI" secondAttribute="top" constant="17" id="CLr-0w-6Xa"/>
-                                                <constraint firstItem="SK4-Cb-urV" firstAttribute="leading" secondItem="tRl-w5-reg" secondAttribute="trailing" constant="8" id="HZa-Uw-DW0"/>
                                                 <constraint firstItem="tRl-w5-reg" firstAttribute="top" secondItem="FZs-xe-zCm" secondAttribute="bottom" constant="2" id="VG1-Qp-9Cf"/>
                                                 <constraint firstItem="FZs-xe-zCm" firstAttribute="leading" secondItem="lag-N9-mWJ" secondAttribute="trailing" constant="8" id="Z2N-c8-bYo"/>
-                                                <constraint firstItem="SK4-Cb-urV" firstAttribute="centerY" secondItem="Oak-WR-zaI" secondAttribute="centerY" id="gCQ-qv-Frn"/>
-                                                <constraint firstItem="SK4-Cb-urV" firstAttribute="leading" secondItem="FZs-xe-zCm" secondAttribute="trailing" constant="8" id="gnQ-YU-9ZO"/>
                                                 <constraint firstItem="lag-N9-mWJ" firstAttribute="centerY" secondItem="Oak-WR-zaI" secondAttribute="centerY" id="pV9-AF-kOk"/>
-                                                <constraint firstAttribute="trailing" secondItem="SK4-Cb-urV" secondAttribute="trailing" constant="10" id="pYT-Hp-WiK"/>
                                                 <constraint firstItem="lag-N9-mWJ" firstAttribute="leading" secondItem="Oak-WR-zaI" secondAttribute="leading" constant="20" id="tCp-SS-Hor"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="btnImage" destination="x5l-S3-OOe" id="Wl2-QX-nmM"/>
                                             <outlet property="downloadedInfo" destination="tRl-w5-reg" id="7pa-Sf-PnN"/>
                                             <outlet property="icon" destination="lag-N9-mWJ" id="rZK-bb-kW9"/>
-                                            <outlet property="lbl_taskStatus" destination="DSy-nj-tnz" id="Jze-cE-CfM"/>
                                             <outlet property="title" destination="FZs-xe-zCm" id="WZs-ze-vQl"/>
                                         </connections>
                                     </tableViewCell>

@@ -63,18 +63,20 @@ extension DownloadManager {
         guard let url = model.model.url, url.dw_isURL else { debugPrint("下载链接错误"); return }
         // 如果没有设置UID，使用url的md5作为UID
         // 如果设置了UID，则以设置的UID为准
-        var uuid: String! = url.dw_MD5String
+        
         if(model.model.uid != nil) {
-            uuid = model.model.uid!
+            debugPrint("已设置UID,使用设置的UID")
         }else {
             debugPrint("未设置UID,使用URL的MD5作为UID")
+            let uuid: String! = url.dw_MD5String
+            model.model.uid = uuid
         }
-        guard let uid = uuid else {
+        
+        guard let uid = model.model.uid else {
             // 理论上永远不会走到这里
             debugPrint("UID为空")
             return
         }
-        
         debugPrint("url && uid", url, uid)
         
         // 如果存在文件，并且是已经下载完的，则直接返回。
