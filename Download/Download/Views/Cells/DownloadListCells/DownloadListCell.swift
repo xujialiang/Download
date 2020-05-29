@@ -84,7 +84,7 @@ class DownloadListCell: UITableViewCell {
                 return "已暂停"
             case .failed:
                 self.btnImage.isHighlighted = false
-                return "重新下载"
+                return "下载失败"
             default:
                 self.btnImage.isHighlighted = false
                 return "开始"

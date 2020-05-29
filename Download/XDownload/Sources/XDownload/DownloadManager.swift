@@ -251,7 +251,7 @@ extension DownloadManager {
     /// 获取未下载完成的数据
     public func getDownloadingModel() -> [DownloadModel] {
         let models = getDownloadModels().filter {
-            return $0.model.state != .completed && $0.model.state != .failed
+            return $0.model.state != .completed
         }
         return models
     }

@@ -24,12 +24,12 @@ class TabbarVC: UITabBarController, FloatDelegate {
     
     // 实现代理方法
     func singleClick() {
-        print("单击")
+        print("单击创建任务按钮")
         self.performSegue(withIdentifier: "showCreateDownloadTask", sender: self)
     }
     
     func repeatClick() {
-        print("双击")
+        print("双击创建任务按钮")
     }
     /*
     // MARK: - Navigation

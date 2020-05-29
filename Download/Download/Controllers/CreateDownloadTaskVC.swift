@@ -19,7 +19,7 @@ class CreateDownloadTaskVC: UITableViewController {
 
     @IBAction func createTask(_ sender: Any) {
         
-        if let link = input_link.text, link.count > 0, link.contains("https://"), link.contains("http://") {
+        if let link = input_link.text, link.count > 0 {
             let model = DownloadModel()
             model.model.name = self.input_link.text?.components(separatedBy: "/").last
             model.model.url = self.input_link.text;

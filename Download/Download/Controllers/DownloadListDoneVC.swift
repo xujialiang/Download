@@ -28,6 +28,7 @@ class DownloadListDoneVC: UIViewController {
 
     private func loadData() {
         self.dataSource = DownloadManager.default.getDownloadFinishModels()
+        tableView.reloadData()
     }
     
 }
@@ -49,6 +50,26 @@ extension DownloadListDoneVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 78
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "删除"
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let model = dataSource[indexPath.row]
+            if let uid = model.model.uid {
+                DownloadManager.default.deleteFile(uid: uid)
+            }
+            dataSource.remove(at: indexPath.row)
+            //刷新tableview
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
     }
 }
 
