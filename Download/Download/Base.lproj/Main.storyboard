@@ -191,7 +191,7 @@
         <!--i虾仔-->
         <scene sceneID="40c-pn-1sO">
             <objects>
-                <tabBarController id="QxA-su-NUo" sceneMemberID="viewController">
+                <tabBarController id="QxA-su-NUo" customClass="TabbarVC" customModule="i虾仔" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="i虾仔" id="qV8-xU-wzA"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eBX-q3-SO0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
