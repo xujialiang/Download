@@ -7,38 +7,21 @@
 //
 
 import UIKit
+import Floaty
 
-class TabbarVC: UITabBarController, FloatDelegate {
+class TabbarVC: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let frame = CGRect.init(x: self.view.frame.width - 60-30, y: self.view.frame.height - 160, width: 60, height: 60)
-        let allbutton = AllFloatButton.init(frame: frame)
-        allbutton.bgImage = UIImage(named: "DownloadtoCloud")
-        allbutton.delegate = self
-        self.view.addSubview(allbutton)
 
-        // Do any additional setup after loading the view.
+        let floaty = Floaty()
+        floaty.addItem("", icon: UIImage(named: "DownloadtoCloud")!, handler: { item in
+            self.performSegue(withIdentifier: "showCreateDownloadTask", sender: self)
+            floaty.close()
+        })
+        floaty.paddingX = 20
+        floaty.paddingY = 80
+        self.view.addSubview(floaty)
     }
-    
-    // 实现代理方法
-    func singleClick() {
-        print("单击创建任务按钮")
-        self.performSegue(withIdentifier: "showCreateDownloadTask", sender: self)
-    }
-    
-    func repeatClick() {
-        print("双击创建任务按钮")
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

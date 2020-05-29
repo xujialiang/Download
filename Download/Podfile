@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 target 'Download' do
 use_frameworks!
@@ -7,5 +7,6 @@ pod 'Cache'
 pod 'MJRefresh'
 pod 'SnapKit'
 pod 'Bugly'
+pod 'Floaty', '~> 4.2.0'
 
 end
