@@ -208,10 +208,10 @@
             </objects>
             <point key="canvasLocation" x="-532" y="-251"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Create Download TaskVC-->
         <scene sceneID="b4P-nP-lam">
             <objects>
-                <tableViewController id="Msd-3D-Ckn" sceneMemberID="viewController">
+                <tableViewController id="Msd-3D-Ckn" customClass="CreateDownloadTaskVC" customModule="i虾仔" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="D8k-rC-eoV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,6 +227,9 @@
                                         <constraint firstAttribute="height" constant="30" id="WgO-9A-Xie"/>
                                     </constraints>
                                     <state key="normal" title="添加"/>
+                                    <connections>
+                                        <action selector="createTask:" destination="Msd-3D-Ckn" eventType="touchUpInside" id="H7D-Fy-WIl"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -267,6 +270,9 @@
                             <outlet property="delegate" destination="Msd-3D-Ckn" id="Py0-mt-wJI"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="input_link" destination="I6M-VZ-Uym" id="5FE-Qf-jau"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xgp-70-rUg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
