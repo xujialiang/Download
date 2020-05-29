@@ -41,10 +41,11 @@ public class DownloadManager: NSObject {
         let configuration = URLSessionConfiguration.background(withIdentifier: "DownloadBackgroundSessionIdentifier")
 //        let configuration = URLSessionConfiguration.default
         configuration.sessionSendsLaunchEvents = true
-        configuration.isDiscretionary = true
+        // 设置以下参数，会导致在真机上无法下载，由系统决定
+//        configuration.isDiscretionary = true
         configuration.timeoutIntervalForRequest = .infinity
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 10
+        queue.maxConcurrentOperationCount = 5
         let session = URLSession(configuration: configuration, delegate: self, delegateQueue: queue)
         return session
     }()
