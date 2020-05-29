@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		556F235E8878DD7A7D7DB903 /* Pods_Download.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC30529F3C0CAC4062DB7EC /* Pods_Download.framework */; };
-		6C0DD2D3247FFA520036D24D /* XDownload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E279F247FF7E600A138C7 /* XDownload.framework */; };
-		6C0DD2D4247FFA520036D24D /* XDownload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E279F247FF7E600A138C7 /* XDownload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C0DD2DB247FFFC90036D24D /* DownloadListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DD2DA247FFFC90036D24D /* DownloadListVC.swift */; };
 		6C0DD2E02480006E0036D24D /* DownloadListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DD2DF2480006E0036D24D /* DownloadListCell.swift */; };
 		6C0DD2E12480058A0036D24D /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1770A83217480B1008464AB /* ProgressView.swift */; };
@@ -17,6 +14,9 @@
 		6C0F54522480B2E200CA152E /* AllFloatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F54512480B2E200CA152E /* AllFloatButton.swift */; };
 		6C0F54542480B40200CA152E /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F54532480B40200CA152E /* TabbarVC.swift */; };
 		6C0F545A2480BA7800CA152E /* CreateDownloadTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F54592480BA7800CA152E /* CreateDownloadTaskVC.swift */; };
+		6C0F54622480CC1E00CA152E /* Pods_Download.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC30529F3C0CAC4062DB7EC /* Pods_Download.framework */; };
+		6C0F54642480D49100CA152E /* XDownload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E279F247FF7E600A138C7 /* XDownload.framework */; };
+		6C0F54652480D49100CA152E /* XDownload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E279F247FF7E600A138C7 /* XDownload.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F19216C3A8200DAE65C /* AppDelegate.swift */; };
 		E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F1B216C3A8200DAE65C /* ViewController.swift */; };
 		E1178F1F216C3A8200DAE65C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1178F1D216C3A8200DAE65C /* Main.storyboard */; };
@@ -51,13 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6C0DD2D5247FFA520036D24D /* Embed Frameworks */ = {
+		6C0F54612480CC1A00CA152E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6C0DD2D4247FFA520036D24D /* XDownload.framework in Embed Frameworks */,
+				6C0F54652480D49100CA152E /* XDownload.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,8 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				556F235E8878DD7A7D7DB903 /* Pods_Download.framework in Frameworks */,
-				6C0DD2D3247FFA520036D24D /* XDownload.framework in Frameworks */,
+				6C0F54622480CC1E00CA152E /* Pods_Download.framework in Frameworks */,
+				6C0F54642480D49100CA152E /* XDownload.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +219,7 @@
 				E1178F13216C3A8200DAE65C /* Frameworks */,
 				E1178F14216C3A8200DAE65C /* Resources */,
 				FC3E96A5057CFFD39EA50F76 /* [CP] Embed Pods Frameworks */,
-				6C0DD2D5247FFA520036D24D /* Embed Frameworks */,
+				6C0F54612480CC1A00CA152E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
