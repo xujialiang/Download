@@ -13,7 +13,8 @@ class DownloadListVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     private var dataSource: [DownloadModel] = [DownloadModel]()
-
+    @IBOutlet weak var emptyView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addNotification()
@@ -119,6 +120,7 @@ class DownloadListVC: UIViewController {
 
 extension DownloadListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.emptyView.isHidden = dataSource.count > 0;
         return dataSource.count
     }
     
