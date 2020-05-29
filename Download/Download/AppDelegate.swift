@@ -8,6 +8,7 @@
 
 import UIKit
 import XDownload
+import Bugly
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundid: UIBackgroundTaskIdentifier?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        Bugly.start(withAppId: "5075f30a8d")
 //        window = UIWindow(frame: UIScreen.main.bounds)
 //        let vc = ViewController()
 //        let nav = UINavigationController(rootViewController: vc)

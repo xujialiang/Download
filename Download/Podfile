@@ -6,5 +6,6 @@ use_frameworks!
 pod 'Cache'
 pod 'MJRefresh'
 pod 'SnapKit'
+pod 'Bugly'
 
 end
