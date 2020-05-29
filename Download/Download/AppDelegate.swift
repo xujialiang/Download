@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Bugly.start(withAppId: "5075f30a8d")
+        MTA.start(withAppkey: "I745M6HRTVGT")
 //        window = UIWindow(frame: UIScreen.main.bounds)
 //        let vc = ViewController()
 //        let nav = UINavigationController(rootViewController: vc)
@@ -51,6 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         debugPrint("杀死程序")
         DownloadManager.default.cancelAllTask()
         debugPrint("取消了所有任务")
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if MTAAutoTrack.handle(url) {
+            return true
+        }
+        return false
     }
 }
 

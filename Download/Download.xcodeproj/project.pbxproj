@@ -17,6 +17,9 @@
 		6C0F54682480D5BB00CA152E /* XDownload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E279F247FF7E600A138C7 /* XDownload.framework */; };
 		6C0F54692480D5BB00CA152E /* XDownload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1E279F247FF7E600A138C7 /* XDownload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C0F546B2480D5C400CA152E /* Pods_Download.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC30529F3C0CAC4062DB7EC /* Pods_Download.framework */; };
+		6C0F54772480F20C00CA152E /* libautotrack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F546F2480F20C00CA152E /* libautotrack.a */; };
+		6C0F54782480F20C00CA152E /* libcrashreporter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F54722480F20C00CA152E /* libcrashreporter.a */; };
+		6C0F54792480F20C00CA152E /* libmtasdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F54732480F20C00CA152E /* libmtasdk.a */; };
 		E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F19216C3A8200DAE65C /* AppDelegate.swift */; };
 		E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F1B216C3A8200DAE65C /* ViewController.swift */; };
 		E1178F1F216C3A8200DAE65C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1178F1D216C3A8200DAE65C /* Main.storyboard */; };
@@ -73,6 +76,15 @@
 		6C0F54512480B2E200CA152E /* AllFloatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFloatButton.swift; sourceTree = "<group>"; };
 		6C0F54532480B40200CA152E /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		6C0F54592480BA7800CA152E /* CreateDownloadTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDownloadTaskVC.swift; sourceTree = "<group>"; };
+		6C0F546F2480F20C00CA152E /* libautotrack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libautotrack.a; sourceTree = "<group>"; };
+		6C0F54702480F20C00CA152E /* MTAAutoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAAutoTrack.h; sourceTree = "<group>"; };
+		6C0F54712480F20C00CA152E /* MTACrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTACrashReporter.h; sourceTree = "<group>"; };
+		6C0F54722480F20C00CA152E /* libcrashreporter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrashreporter.a; sourceTree = "<group>"; };
+		6C0F54732480F20C00CA152E /* libmtasdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmtasdk.a; sourceTree = "<group>"; };
+		6C0F54742480F20C00CA152E /* MTA+Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTA+Account.h"; sourceTree = "<group>"; };
+		6C0F54752480F20C00CA152E /* MTAConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAConfig.h; sourceTree = "<group>"; };
+		6C0F54762480F20C00CA152E /* MTA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTA.h; sourceTree = "<group>"; };
+		6C0F547A2480F28A00CA152E /* Download-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Download-Bridging-Header.h"; sourceTree = "<group>"; };
 		6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XDownload.xcodeproj; path = XDownload/XDownload.xcodeproj; sourceTree = "<group>"; };
 		E1178F16216C3A8200DAE65C /* i虾仔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "i虾仔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1178F19216C3A8200DAE65C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +104,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C0F54782480F20C00CA152E /* libcrashreporter.a in Frameworks */,
+				6C0F54792480F20C00CA152E /* libmtasdk.a in Frameworks */,
+				6C0F54772480F20C00CA152E /* libautotrack.a in Frameworks */,
 				6C0F546B2480D5C400CA152E /* Pods_Download.framework in Frameworks */,
 				6C0F54682480D5BB00CA152E /* XDownload.framework in Frameworks */,
 			);
@@ -161,6 +176,29 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		6C0F546D2480F20C00CA152E /* 3rd */ = {
+			isa = PBXGroup;
+			children = (
+				6C0F546E2480F20C00CA152E /* mta */,
+			);
+			path = 3rd;
+			sourceTree = "<group>";
+		};
+		6C0F546E2480F20C00CA152E /* mta */ = {
+			isa = PBXGroup;
+			children = (
+				6C0F546F2480F20C00CA152E /* libautotrack.a */,
+				6C0F54702480F20C00CA152E /* MTAAutoTrack.h */,
+				6C0F54712480F20C00CA152E /* MTACrashReporter.h */,
+				6C0F54722480F20C00CA152E /* libcrashreporter.a */,
+				6C0F54732480F20C00CA152E /* libmtasdk.a */,
+				6C0F54742480F20C00CA152E /* MTA+Account.h */,
+				6C0F54752480F20C00CA152E /* MTAConfig.h */,
+				6C0F54762480F20C00CA152E /* MTA.h */,
+			);
+			path = mta;
+			sourceTree = "<group>";
+		};
 		6C1E2798247FF7E600A138C7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +230,7 @@
 		E1178F18216C3A8200DAE65C /* Download */ = {
 			isa = PBXGroup;
 			children = (
+				6C0F546D2480F20C00CA152E /* 3rd */,
 				6C0DD2D9247FFF980036D24D /* Controllers */,
 				6C0DD2DC248000100036D24D /* Views */,
 				6C0F54502480B2C600CA152E /* Components */,
@@ -203,6 +242,7 @@
 				E1178F20216C3A8300DAE65C /* Assets.xcassets */,
 				E1178F22216C3A8300DAE65C /* LaunchScreen.storyboard */,
 				E1178F25216C3A8300DAE65C /* Info.plist */,
+				6C0F547A2480F28A00CA152E /* Download-Bridging-Header.h */,
 			);
 			path = Download;
 			sourceTree = "<group>";
@@ -243,6 +283,7 @@
 				TargetAttributes = {
 					E1178F15216C3A8200DAE65C = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -512,8 +553,9 @@
 			baseConfigurationReference = 58D8540D0AEA89C7870FA6DD /* Pods-Download.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1000;
+				CURRENT_PROJECT_VERSION = 1001;
 				DEVELOPMENT_TEAM = 5UDY685QHH;
 				INFOPLIST_FILE = Download/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -521,12 +563,18 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Download/3rd/mta",
+				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.xujialiang.DownloadManager;
 				PRODUCT_NAME = "i虾仔";
 				PROVISIONING_PROFILE_SPECIFIER = DownloadManagerDev;
+				SWIFT_OBJC_BRIDGING_HEADER = "Download/Download-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -535,8 +583,9 @@
 			baseConfigurationReference = F3E4DE8AADD67D80CE4BB10C /* Pods-Download.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1000;
+				CURRENT_PROJECT_VERSION = 1001;
 				DEVELOPMENT_TEAM = 5UDY685QHH;
 				INFOPLIST_FILE = Download/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -544,12 +593,17 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Download/3rd/mta",
+				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.xujialiang.DownloadManager;
 				PRODUCT_NAME = "i虾仔";
 				PROVISIONING_PROFILE_SPECIFIER = DownloadManagerDev;
+				SWIFT_OBJC_BRIDGING_HEADER = "Download/Download-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
