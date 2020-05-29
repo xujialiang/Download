@@ -25,6 +25,7 @@ class TabbarVC: UITabBarController, FloatDelegate {
     // 实现代理方法
     func singleClick() {
         print("单击")
+        self.performSegue(withIdentifier: "showCreateDownloadTask", sender: self)
     }
     
     func repeatClick() {
