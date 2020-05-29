@@ -254,6 +254,7 @@
 				DD5F4A1F0EB7E5570CF426DC /* [CP] Check Pods Manifest.lock */,
 				E1178F12216C3A8200DAE65C /* Sources */,
 				E1178F13216C3A8200DAE65C /* Frameworks */,
+				6CF5721224818E3D009236E8 /* Auto Build Number  */,
 				E1178F14216C3A8200DAE65C /* Resources */,
 				FC3E96A5057CFFD39EA50F76 /* [CP] Embed Pods Frameworks */,
 				6C0F546A2480D5BB00CA152E /* Embed Frameworks */,
@@ -339,6 +340,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6CF5721224818E3D009236E8 /* Auto Build Number  */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Auto Build Number ";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "agvtool next-version -all\n";
+		};
 		DD5F4A1F0EB7E5570CF426DC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -551,7 +570,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1005;
+				CURRENT_PROJECT_VERSION = 1007;
 				DEVELOPMENT_TEAM = 5UDY685QHH;
 				INFOPLIST_FILE = Download/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -571,6 +590,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -582,7 +602,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1005;
+				CURRENT_PROJECT_VERSION = 1007;
 				DEVELOPMENT_TEAM = 5UDY685QHH;
 				INFOPLIST_FILE = Download/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -601,6 +621,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Download/Download-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
