@@ -22,7 +22,6 @@
 
 /* Begin PBXBuildFile section */
 		6C0F54482480A72B00CA152E /* Pods_Download.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F54472480A72B00CA152E /* Pods_Download.framework */; };
-		6C0F54492480A72B00CA152E /* Pods_Download.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F54472480A72B00CA152E /* Pods_Download.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C5BCF8A247F706600B34C00 /* Download+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BCF86247F706600B34C00 /* Download+Extension.swift */; };
 		6C5BCF8B247F706600B34C00 /* DownloadCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BCF87247F706600B34C00 /* DownloadCache.swift */; };
 		6C5BCF8C247F706600B34C00 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BCF88247F706600B34C00 /* DownloadManager.swift */; };
@@ -42,20 +41,6 @@
 			remoteInfo = XDownloadTests;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		6C0F544A2480A72B00CA152E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6C0F54492480A72B00CA152E /* Pods_Download.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0035C8DC0AF089131CB1629E /* Pods_XDownload.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XDownload.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,7 +190,6 @@
 				07010AFF2ACD5F5640072C8A /* [CP] Check Pods Manifest.lock */,
 				OBJ_22 /* Sources */,
 				OBJ_24 /* Frameworks */,
-				6C0F544A2480A72B00CA152E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
