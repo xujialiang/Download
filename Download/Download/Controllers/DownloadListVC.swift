@@ -92,8 +92,11 @@ class DownloadListVC: UIViewController {
 //        dataSource.append(model9)
 ////        dataSource.append(model10)
 //        tableView.reloadData()
+        
         dataSource = DownloadManager.default.getDownloadingModel()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     @objc private func downLoadProgress(notification: Notification) {
