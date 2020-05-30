@@ -21,7 +21,7 @@ class DownloadViewController: UIViewController {
         return tableView
     }()
     
-    private var dataSource: [DownloadModel] = [DownloadModel]()
+    private var dataSource: [XDownloadModel] = [XDownloadModel]()
     
     private var page: Int = 1
     
@@ -43,7 +43,7 @@ class DownloadViewController: UIViewController {
     }
     
     @objc private func downLoadProgress(notification: Notification) {
-        if let model = notification.object as? DownloadDescModel {
+        if let model = notification.object as? XDownloadDescModel {
             for (index, descModel) in dataSource.enumerated() {
                 if model.url == descModel.model.url {
                     DispatchQueue.main.async { [weak self] in
@@ -84,11 +84,11 @@ extension DownloadViewController {
     private func loadData() {
         NotificationCenter.default.removeObserver(self)
         if page == 0 {
-            if let model = DownloadManager.default.getDownloadModels().first {
+            if let model = XDownload.default.getDownloadModels().first {
                 dataSource = [model]
             }
         } else {
-            dataSource = DownloadManager.default.getDownloadModels()
+            dataSource = XDownload.default.getDownloadModels()
         }
         
         tableView.reloadData()
@@ -98,14 +98,14 @@ extension DownloadViewController {
     
     @objc private func deleteClick() {
         NotificationCenter.default.removeObserver(self)
-        DownloadManager.default.deleteAllFile()
+        XDownload.default.deleteAllFile()
         loadData()
         addNotification()
     }
     
     @objc private func cancelClick(sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        sender.isSelected ? DownloadManager.default.updateDownloading() : DownloadManager.default.cancelAllTask()
+        sender.isSelected ? XDownload.default.updateDownloading() : XDownload.default.cancelAllTask()
     }
 }
 
@@ -127,7 +127,7 @@ extension DownloadViewController: UITableViewDelegate, UITableViewDataSource {
             guard let `self` = self else { return }
             /// 删除时先移除通知再注册通知（防止数据改变导致进度和状态错乱）
             NotificationCenter.default.removeObserver(self)
-            DownloadManager.default.deleteFile(uid: model.model.uid!)
+            XDownload.default.deleteFile(uid: model.model.uid!)
             self.loadData()
             self.addNotification()
         }
@@ -140,7 +140,7 @@ extension DownloadViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataSource[indexPath.row]
         if let uid = model.model.uid {
-            debugPrint(DownloadManager.default.getFile(uid: uid))
+            debugPrint(XDownload.default.getFile(uid: uid))
         }
     }
 }

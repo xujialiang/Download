@@ -20,10 +20,10 @@ class CreateDownloadTaskVC: UITableViewController {
     @IBAction func createTask(_ sender: Any) {
         
         if let link = input_link.text, link.count > 0 {
-            let model = DownloadModel()
+            let model = XDownloadModel()
             model.model.name = self.input_link.text?.components(separatedBy: "/").last
             model.model.url = self.input_link.text;
-            DownloadManager.default.download(model: model)
+            XDownload.default.download(model: model)
             self.dismiss(animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "温馨提示", message: "请输入正确的链接~", preferredStyle: .alert)

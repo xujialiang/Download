@@ -18,7 +18,7 @@ class DownloadListCell: UITableViewCell {
     
     @IBOutlet weak var btnImage: UIImageView!
     
-    private var downLoadModel: DownloadModel?
+    private var downLoadModel: XDownloadModel?
     private lazy var progressView: ProgressView = {
         ProgressView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width , height: 1))
     }()
@@ -29,13 +29,13 @@ class DownloadListCell: UITableViewCell {
         addSubviews()
     }
     
-    func bindData(model: DownloadModel) {
+    func bindData(model: XDownloadModel) {
         downLoadModel = model
         self.title.text = downLoadModel?.model.name
         let ext = downLoadModel?.model.name?.components(separatedBy: ".").last
         self.icon.image = iconImage(ext: ext)
         
-        if let uid = model.model.uid, let model1 = model.getDownloadModel(uid: uid) {
+        if let uid = model.model.uid, let model1 = XDownload.default.getDownloadModel(uid: uid) {
             if progressView != nil {
                 progressView.update(model: model1)
             }
@@ -73,7 +73,7 @@ class DownloadListCell: UITableViewCell {
         guard let downloadModel = downLoadModel else {
             return
         }
-        DownloadManager.default.download(model: downloadModel)
+        XDownload.default.download(model: downloadModel)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -82,7 +82,7 @@ class DownloadListCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    private func state(state: DownloadState) -> String {
+    private func state(state: XDownloadState) -> String {
         
         switch state {
             case .start:

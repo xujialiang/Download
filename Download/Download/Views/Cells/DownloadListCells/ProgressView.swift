@@ -29,7 +29,7 @@ class ProgressView: UIView {
         addSubViews()
     }
     
-    func update(model: DownloadDescModel) {
+    func update(model: XDownloadDescModel) {
         debugPrint("progress: \(model.progress) -- receivedSize: \(model.receivedSize) -- totalLength: \(model.totalLength) -- failedReason: \(model.failedReason ?? "")")
         
         let width = frame.size.width * CGFloat(model.progress)

@@ -25,15 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.rootViewController = nav
 //        window?.makeKeyAndVisible()
         
-        DownloadManager.default.maxDownloadCount = 3
-        DownloadManager.default.updateDownloadingStateWithSuspended()
+        XDownload.default.updateDownloadingStateWithSuspended()
         
         return true
     }
 
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession")
-        DownloadManager.default.backgroundSessionCompletionHandler = completionHandler
+        XDownload.default.backgroundSessionCompletionHandler = completionHandler
     }
     
     
@@ -50,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         debugPrint("杀死程序")
-        DownloadManager.default.cancelAllTask()
+        XDownload.default.cancelAllTask()
         debugPrint("取消了所有任务")
     }
     

@@ -22,10 +22,11 @@
 
 /* Begin PBXBuildFile section */
 		6C0F54482480A72B00CA152E /* Pods_Download.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F54472480A72B00CA152E /* Pods_Download.framework */; };
-		6C5BCF8A247F706600B34C00 /* Download+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BCF86247F706600B34C00 /* Download+Extension.swift */; };
 		6C5BCF8B247F706600B34C00 /* DownloadCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BCF87247F706600B34C00 /* DownloadCache.swift */; };
 		6C5BCF8C247F706600B34C00 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BCF88247F706600B34C00 /* DownloadManager.swift */; };
-		6C5BCF8D247F706600B34C00 /* DownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BCF89247F706600B34C00 /* DownloadModel.swift */; };
+		6C5BCF8D247F706600B34C00 /* XDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BCF89247F706600B34C00 /* XDownloadModel.swift */; };
+		6CB435B42481DA3200983C27 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB435B32481DA3200983C27 /* Config.swift */; };
+		6CB435B62481DB2100983C27 /* XDownload+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB435B52481DB2100983C27 /* XDownload+Extension.swift */; };
 		OBJ_23 /* XDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* XDownload.swift */; };
 		OBJ_30 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_41 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* XCTestManifests.swift */; };
@@ -46,11 +47,12 @@
 		0035C8DC0AF089131CB1629E /* Pods_XDownload.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XDownload.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D5E95385D4D715BA6FD2E71 /* Pods-XDownload.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XDownload.debug.xcconfig"; path = "Target Support Files/Pods-XDownload/Pods-XDownload.debug.xcconfig"; sourceTree = "<group>"; };
 		6C0F54472480A72B00CA152E /* Pods_Download.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Download.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C5BCF86247F706600B34C00 /* Download+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Download+Extension.swift"; sourceTree = "<group>"; };
 		6C5BCF87247F706600B34C00 /* DownloadCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCache.swift; sourceTree = "<group>"; };
 		6C5BCF88247F706600B34C00 /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
-		6C5BCF89247F706600B34C00 /* DownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadModel.swift; sourceTree = "<group>"; };
+		6C5BCF89247F706600B34C00 /* XDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XDownloadModel.swift; sourceTree = "<group>"; };
 		6C91D84E247F868A0007A950 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CB435B32481DA3200983C27 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		6CB435B52481DB2100983C27 /* XDownload+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XDownload+Extension.swift"; sourceTree = "<group>"; };
 		96093B484B1CC13E59ED65B2 /* Pods-XDownload.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XDownload.release.xcconfig"; path = "Target Support Files/Pods-XDownload/Pods-XDownload.release.xcconfig"; sourceTree = "<group>"; };
 		OBJ_12 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XDownloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDownloadTests.swift; sourceTree = "<group>"; };
@@ -155,10 +157,11 @@
 		OBJ_8 /* XDownload */ = {
 			isa = PBXGroup;
 			children = (
-				6C5BCF86247F706600B34C00 /* Download+Extension.swift */,
+				6CB435B32481DA3200983C27 /* Config.swift */,
 				6C5BCF87247F706600B34C00 /* DownloadCache.swift */,
 				6C5BCF88247F706600B34C00 /* DownloadManager.swift */,
-				6C5BCF89247F706600B34C00 /* DownloadModel.swift */,
+				6CB435B52481DB2100983C27 /* XDownload+Extension.swift */,
+				6C5BCF89247F706600B34C00 /* XDownloadModel.swift */,
 				OBJ_9 /* XDownload.swift */,
 			);
 			name = XDownload;
@@ -283,11 +286,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				6CB435B62481DB2100983C27 /* XDownload+Extension.swift in Sources */,
 				OBJ_23 /* XDownload.swift in Sources */,
 				6C5BCF8B247F706600B34C00 /* DownloadCache.swift in Sources */,
-				6C5BCF8D247F706600B34C00 /* DownloadModel.swift in Sources */,
-				6C5BCF8A247F706600B34C00 /* Download+Extension.swift in Sources */,
+				6C5BCF8D247F706600B34C00 /* XDownloadModel.swift in Sources */,
 				6C5BCF8C247F706600B34C00 /* DownloadManager.swift in Sources */,
+				6CB435B42481DA3200983C27 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

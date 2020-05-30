@@ -29,7 +29,7 @@ class ViewTableViewCell: UITableViewCell {
         return stateBtn
     }()
     
-    private var model: DownloadModel?
+    private var model: XDownloadModel?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,11 +37,11 @@ class ViewTableViewCell: UITableViewCell {
         addSubviews()
     }
     
-    func update(model: DownloadModel) {
+    func update(model: XDownloadModel) {
         self.model = model
         nameLabel.text = model.model.name
         
-        if let uid = model.model.uid, let model1 = model.getDownloadModel(uid: uid) {
+        if let uid = model.model.uid, let model1 = XDownload.default.getDownloadModel(uid: uid) {
             stateBtn.setTitle(state(state: model1.state), for: .normal)
             progressView.update(model: model1)
         } else {
@@ -50,7 +50,7 @@ class ViewTableViewCell: UITableViewCell {
         }
     }
     
-    func updateView(model: DownloadDescModel) {
+    func updateView(model: XDownloadDescModel) {
         progressView.update(model: model)
         stateBtn.setTitle(state(state: model.state), for: .normal)
     }
@@ -61,10 +61,10 @@ class ViewTableViewCell: UITableViewCell {
             return
         }
         
-        DownloadManager.default.download(model: downloadModel)
+        XDownload.default.download(model: downloadModel)
     }
     
-    private func state(state: DownloadState) -> String {
+    private func state(state: XDownloadState) -> String {
         switch state {
         case .start:
             return "下载中"

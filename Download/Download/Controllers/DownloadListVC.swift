@@ -12,7 +12,7 @@ import XDownload
 class DownloadListVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    private var dataSource: [DownloadModel] = [DownloadModel]()
+    private var dataSource: [XDownloadModel] = [XDownloadModel]()
     @IBOutlet weak var emptyView: UIView!
     
     override func viewDidLoad() {
@@ -93,14 +93,14 @@ class DownloadListVC: UIViewController {
 ////        dataSource.append(model10)
 //        tableView.reloadData()
         
-        dataSource = DownloadManager.default.getDownloadingModel()
+        dataSource = XDownload.default.getDownloadingModel()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     
     @objc private func downLoadProgress(notification: Notification) {
-        if let model = notification.object as? DownloadDescModel {
+        if let model = notification.object as? XDownloadDescModel {
             for (index, descModel) in dataSource.enumerated() {
                 if model.uid == descModel.model.uid {
                     DispatchQueue.main.async { [weak self] in
@@ -115,7 +115,7 @@ class DownloadListVC: UIViewController {
     }
     
     @objc private func downLoadStatus(notification: Notification) {
-        if let model = notification.object as? DownloadDescModel {
+        if let model = notification.object as? XDownloadDescModel {
             self.loadData()
         }
     }
@@ -153,7 +153,7 @@ extension DownloadListVC: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             let model = dataSource[indexPath.row]
             if let uid = model.model.uid {
-                DownloadManager.default.deleteFile(uid: uid)
+                XDownload.default.deleteFile(uid: uid)
             }
             dataSource.remove(at: indexPath.row)
             //刷新tableview
