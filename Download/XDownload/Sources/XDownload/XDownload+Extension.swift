@@ -51,10 +51,15 @@ extension DownloadManager {
     
     /// 保存下载的url(取 model 用)
     internal func save(uid: String) {
-        let uidArr: NSMutableArray = NSMutableArray(contentsOfFile: DownloadCacheURLPath) ?? NSMutableArray()
-        guard !(uidArr.contains(uid)) else { return }
-        uidArr.add(uid)
-        uidArr.write(toFile: DownloadCacheURLPath, atomically: true)
+        do {
+            try FileManager.default.createDirectory(atPath: ApplicationSupportDirectory, withIntermediateDirectories: true, attributes: nil)
+            let uidArr: NSMutableArray = NSMutableArray(contentsOfFile: DownloadCacheURLPath) ?? NSMutableArray()
+            guard !(uidArr.contains(uid)) else { return }
+            uidArr.add(uid)
+            uidArr.write(toFile: DownloadCacheURLPath, atomically: true)
+        } catch {
+            debugPrint("保存下载的url出错",error)
+        }
     }
     
     /// 获取已下载文件的大小

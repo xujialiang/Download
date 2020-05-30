@@ -92,6 +92,8 @@ internal extension DownloadManager {
                 start(uid: uid)
             }catch{}
         }else{
+            // 创建目录
+            let _ = self.path(uid: "")
             debugPrint("不存在缓存文件, 发起一个新请求，从头开始下载")
             // 创建请求
             var request = URLRequest(url: URL(string: url)!)
