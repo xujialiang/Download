@@ -8,7 +8,7 @@
 import UIKit
 
 /// 缓存主目录
-let DownloadHomeDirectory = NSHomeDirectory() + "/Documents/XDownload/"
+public let DownloadHomeDirectory = NSHomeDirectory() + "/Documents/XDownload/"
 /// 下载文件的路径
 public let DownloadCachePath = DownloadHomeDirectory + "DownloadCache/"
 /// 保存下载的url路径(取模型用)

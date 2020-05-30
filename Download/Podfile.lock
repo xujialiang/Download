@@ -5,6 +5,7 @@ PODS:
   - GSImageViewerController (1.6.2)
   - MJRefresh (3.1.15.7)
   - SnapKit (4.0.1)
+  - Swifter (1.4.7)
 
 DEPENDENCIES:
   - Bugly
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - GSImageViewerController
   - MJRefresh
   - SnapKit
+  - Swifter (~> 1.4.7)
 
 SPEC REPOS:
   trunk:
@@ -22,6 +24,7 @@ SPEC REPOS:
     - GSImageViewerController
     - MJRefresh
     - SnapKit
+    - Swifter
 
 SPEC CHECKSUMS:
   Bugly: 4edda9bb0e3017fd453612189069757195fa23ca
@@ -30,7 +33,8 @@ SPEC CHECKSUMS:
   GSImageViewerController: 3b8fb7d2ab7596152329d7910eeb1905b2284cb9
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
 
-PODFILE CHECKSUM: b8dcd718120c39f0395754afadf6532144206248
+PODFILE CHECKSUM: dfbe22145a683b695b393878b5bea73182623d85
 
 COCOAPODS: 1.9.2

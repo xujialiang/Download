@@ -21,6 +21,7 @@
 		6C0F54792480F20C00CA152E /* libmtasdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F54732480F20C00CA152E /* libmtasdk.a */; };
 		6CB435BD2482045100983C27 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB435BC2482045100983C27 /* PreviewViewController.swift */; };
 		6CB435C32482247D00983C27 /* DownloadListDoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB435BF2482247D00983C27 /* DownloadListDoneCell.swift */; };
+		6CB435D224825BA800983C27 /* XHttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB435D124825BA800983C27 /* XHttpServer.swift */; };
 		E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F19216C3A8200DAE65C /* AppDelegate.swift */; };
 		E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F1B216C3A8200DAE65C /* ViewController.swift */; };
 		E1178F1F216C3A8200DAE65C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1178F1D216C3A8200DAE65C /* Main.storyboard */; };
@@ -88,6 +89,7 @@
 		6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XDownload.xcodeproj; path = XDownload/XDownload.xcodeproj; sourceTree = "<group>"; };
 		6CB435BC2482045100983C27 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		6CB435BF2482247D00983C27 /* DownloadListDoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadListDoneCell.swift; sourceTree = "<group>"; };
+		6CB435D124825BA800983C27 /* XHttpServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = XHttpServer.swift; path = Download/Controllers/XHttpServer.swift; sourceTree = SOURCE_ROOT; };
 		E1178F16216C3A8200DAE65C /* i虾仔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "i虾仔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1178F19216C3A8200DAE65C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1178F1B216C3A8200DAE65C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		6C0F54502480B2C600CA152E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6CB435D124825BA800983C27 /* XHttpServer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				6C0F545A2480BA7800CA152E /* CreateDownloadTaskVC.swift in Sources */,
 				E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */,
 				6CB435BD2482045100983C27 /* PreviewViewController.swift in Sources */,
+				6CB435D224825BA800983C27 /* XHttpServer.swift in Sources */,
 				6C0F54542480B40200CA152E /* TabbarVC.swift in Sources */,
 				6C0DD2E12480058A0036D24D /* ProgressView.swift in Sources */,
 				E1641767216E024700D56120 /* DownloadViewController.swift in Sources */,
@@ -590,7 +594,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Download/3rd/mta",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.xujialiang.DownloadManager;
 				PRODUCT_NAME = "i虾仔";
 				PROVISIONING_PROFILE_SPECIFIER = DownloadManagerDev;
@@ -622,7 +626,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Download/3rd/mta",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.xujialiang.DownloadManager;
 				PRODUCT_NAME = "i虾仔";
 				PROVISIONING_PROFILE_SPECIFIER = DownloadManagerAppStore;

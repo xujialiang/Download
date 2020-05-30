@@ -16,16 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var backgroundid: UIBackgroundTaskIdentifier?
     
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Bugly.start(withAppId: "5075f30a8d")
         MTA.start(withAppkey: "I745M6HRTVGT")
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        let vc = ViewController()
-//        let nav = UINavigationController(rootViewController: vc)
-//        window?.rootViewController = nav
-//        window?.makeKeyAndVisible()
-        
+
         XDownload.default.updateDownloadingStateWithSuspended()
+        
+        let _ = XHttpServer.default
         
         return true
     }
