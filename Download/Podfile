@@ -8,5 +8,6 @@ pod 'MJRefresh'
 pod 'SnapKit'
 pod 'Bugly'
 pod 'Floaty', '~> 4.2.0'
+pod "GSImageViewerController"
 
 end

@@ -15,7 +15,7 @@ let semaphoreSignal = DispatchSemaphore(value: 0)
 internal class DownloadManager: NSObject {
 
     internal static let `default` = DownloadManager()
-    
+        
     internal var backgroundSessionCompletionHandler: (() -> Void)?
     
     // 后台下载session，一个App只要维护一个session即可
@@ -36,6 +36,11 @@ internal class DownloadManager: NSObject {
     
     private var tasks: [String: URLSessionDownloadTask] = [String: URLSessionDownloadTask]()
     
+    override init() {
+        super.init()
+        let ret = FileManager().addSkipBackupAttributeToItemAtURL(URL(fileURLWithPath: DownloadHomeDirectory, isDirectory: true))
+        debugPrint("addSkipBackupAttributeToItemAtURL", ret)
+    }
 }
 
 internal extension DownloadManager {

@@ -8,6 +8,7 @@
 
 import UIKit
 import XDownload
+import GSImageViewerController
 
 class DownloadListDoneVC: UIViewController {
 
@@ -70,6 +71,28 @@ extension DownloadListDoneVC: UITableViewDelegate, UITableViewDataSource {
             //刷新tableview
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.performSegue(withIdentifier: "showpreview", sender: self)
+        let model = dataSource[indexPath.row]
+        if let name = model.model.name {
+            if name.contains("jpg") || name.contains("png") || name.contains("jpeg"){
+                guard let uid = model.model.uid else {
+                    return
+                }
+                let filePath =  DownloadCachePath + uid + "." + (name.components(separatedBy: ".").last ?? "")
+                let img = UIImage(contentsOfFile: filePath)
+                guard let image = img else {
+                    return
+                }
+                let imageInfo = GSImageInfo(image: image, imageMode: .aspectFit)
+                let imageViewer = GSImageViewerController(imageInfo: imageInfo)
+                imageViewer.title = name
+                navigationController?.pushViewController(imageViewer, animated: true)
+            }
+        }
+        
     }
 }
 

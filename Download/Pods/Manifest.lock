@@ -2,6 +2,7 @@ PODS:
   - Bugly (2.5.4)
   - Cache (5.2.0)
   - Floaty (4.2.0)
+  - GSImageViewerController (1.6.2)
   - MJRefresh (3.1.15.7)
   - SnapKit (4.0.1)
 
@@ -9,6 +10,7 @@ DEPENDENCIES:
   - Bugly
   - Cache
   - Floaty (~> 4.2.0)
+  - GSImageViewerController
   - MJRefresh
   - SnapKit
 
@@ -17,6 +19,7 @@ SPEC REPOS:
     - Bugly
     - Cache
     - Floaty
+    - GSImageViewerController
     - MJRefresh
     - SnapKit
 
@@ -24,9 +27,10 @@ SPEC CHECKSUMS:
   Bugly: 4edda9bb0e3017fd453612189069757195fa23ca
   Cache: 807c5d86d01a177f06ede9865add3aea269bbfd4
   Floaty: e2bd5a0f6f7f70899e26ff2da31081c8bee8d1b0
+  GSImageViewerController: 3b8fb7d2ab7596152329d7910eeb1905b2284cb9
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: 282c453d44f26b5902efd5312e3293fa87a5a97e
+PODFILE CHECKSUM: b8dcd718120c39f0395754afadf6532144206248
 
 COCOAPODS: 1.9.2

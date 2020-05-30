@@ -10,7 +10,7 @@ import UIKit
 /// 缓存主目录
 let DownloadHomeDirectory = NSHomeDirectory() + "/Documents/XDownload/"
 /// 下载文件的路径
-let DownloadCachePath = DownloadHomeDirectory + "DownloadCache/"
+public let DownloadCachePath = DownloadHomeDirectory + "DownloadCache/"
 /// 保存下载的url路径(取模型用)
 let ApplicationSupportDirectory = NSHomeDirectory() + "/Library/Application Support/XDownload/"
 let DownloadCacheURLPath = ApplicationSupportDirectory + "URL.plist"
@@ -19,3 +19,4 @@ let DownloadCacheModelPath = "DownloadCache/DownloadModelCache"
 
 // 最大任务数量
 let MaxDownloadQueue = 10
+
