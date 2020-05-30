@@ -17,11 +17,6 @@ public enum XDownloadState: Int, Codable {
     case failed /// 下载失败
 }
 
-/// 进度通知
-public let DownloadProgressNotification: Notification.Name = Notification.Name("DownloadProgressNotification")
-// 下载状态通知
-public let DownloadStatusNotification: Notification.Name = Notification.Name("DownloadStatusNotification")
-
 public class XDownloadModel: NSObject {
     
     public var states: XDownloadState = .default {
@@ -53,7 +48,7 @@ public class XDownloadDescModel: Codable {
     /** 必须有的属性 -- 开始 */
     public var uid: String? /// 资源ID，资源唯一标识，UID不同，即使URL相同，也认为是两个资源
     public var url: String? /// 下载地址
-    
+    public var createdTime: Date = Date()//创建时间
     public var resumeDataPath: String? /// 恢复下载时的文件路径
     
     public var totalLength: Int64 = 0 /// 获得服务器这次请求 返回数据的总长度

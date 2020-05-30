@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// 进度通知
+public let DownloadProgressNotification: Notification.Name = Notification.Name("DownloadProgressNotification")
+// 下载状态通知
+public let DownloadStatusNotification: Notification.Name = Notification.Name("DownloadStatusNotification")
+
 public class XDownload: NSObject {
 
     public static let `default` = XDownload()

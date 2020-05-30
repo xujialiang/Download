@@ -116,7 +116,7 @@ internal extension DownloadManager {
     }
     
     /// 根据url取消/暂停任务
-    internal func cancelTask(uid: String) {
+    func cancelTask(uid: String) {
 //        guard url.dw_isURL else { return }
         if let task = getTask(uid: uid) {
             debugPrint("暂停任务", uid)
