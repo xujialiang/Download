@@ -44,7 +44,7 @@ extension DownloadListDoneVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: DownloadListCell = tableView.dequeueReusableCell(withIdentifier: "cellid") as! DownloadListCell
+        let cell: DownloadListDoneCell = tableView.dequeueReusableCell(withIdentifier: "cellid") as! DownloadListDoneCell
         let model = dataSource[indexPath.row]
         cell.bindData(model: model)
         return cell

@@ -20,6 +20,7 @@
 		6C0F54782480F20C00CA152E /* libcrashreporter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F54722480F20C00CA152E /* libcrashreporter.a */; };
 		6C0F54792480F20C00CA152E /* libmtasdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0F54732480F20C00CA152E /* libmtasdk.a */; };
 		6CB435BD2482045100983C27 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB435BC2482045100983C27 /* PreviewViewController.swift */; };
+		6CB435C32482247D00983C27 /* DownloadListDoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB435BF2482247D00983C27 /* DownloadListDoneCell.swift */; };
 		E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F19216C3A8200DAE65C /* AppDelegate.swift */; };
 		E1178F1C216C3A8200DAE65C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1178F1B216C3A8200DAE65C /* ViewController.swift */; };
 		E1178F1F216C3A8200DAE65C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1178F1D216C3A8200DAE65C /* Main.storyboard */; };
@@ -86,6 +87,7 @@
 		6C0F547A2480F28A00CA152E /* Download-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Download-Bridging-Header.h"; sourceTree = "<group>"; };
 		6C1E2797247FF7E600A138C7 /* XDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XDownload.xcodeproj; path = XDownload/XDownload.xcodeproj; sourceTree = "<group>"; };
 		6CB435BC2482045100983C27 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		6CB435BF2482247D00983C27 /* DownloadListDoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadListDoneCell.swift; sourceTree = "<group>"; };
 		E1178F16216C3A8200DAE65C /* i虾仔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "i虾仔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1178F19216C3A8200DAE65C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1178F1B216C3A8200DAE65C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				E1770A83217480B1008464AB /* ProgressView.swift */,
 				6C0DD2DF2480006E0036D24D /* DownloadListCell.swift */,
+				6CB435BF2482247D00983C27 /* DownloadListDoneCell.swift */,
 			);
 			path = DownloadListCells;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				6C0DD2E02480006E0036D24D /* DownloadListCell.swift in Sources */,
 				6C0F544F2480A8E400CA152E /* DownloadListDoneVC.swift in Sources */,
 				E1178F1A216C3A8200DAE65C /* AppDelegate.swift in Sources */,
+				6CB435C32482247D00983C27 /* DownloadListDoneCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
