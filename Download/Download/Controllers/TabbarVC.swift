@@ -19,6 +19,7 @@ class TabbarVC: UITabBarController {
             self.performSegue(withIdentifier: "showCreateDownloadTask", sender: self)
             floaty.close()
         })
+        floaty.friendlyTap = false
         floaty.paddingX = 20
         floaty.paddingY = 80
         self.view.addSubview(floaty)
