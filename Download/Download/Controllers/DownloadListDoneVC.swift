@@ -9,6 +9,7 @@
 import UIKit
 import XDownload
 import GSImageViewerController
+import AVKit
 
 class DownloadListDoneVC: UIViewController {
 
@@ -77,6 +78,11 @@ extension DownloadListDoneVC: UITableViewDelegate, UITableViewDataSource {
 //        self.performSegue(withIdentifier: "showpreview", sender: self)
         let model = dataSource[indexPath.row]
         if let name = model.model.name {
+            guard let uid = model.model.uid else {
+                return
+            }
+            let filePath =  DownloadCachePath + uid + "." + (name.components(separatedBy: ".").last ?? "")
+            
             if name.contains("jpg") || name.contains("png") || name.contains("jpeg"){
                 guard let uid = model.model.uid else {
                     return
@@ -90,6 +96,12 @@ extension DownloadListDoneVC: UITableViewDelegate, UITableViewDataSource {
                 let imageViewer = GSImageViewerController(imageInfo: imageInfo)
                 imageViewer.title = name
                 navigationController?.pushViewController(imageViewer, animated: true)
+            }else if name.contains("mp4") || name.contains("mp3") || name.contains("mov") {
+                let player = AVPlayer(url: NSURL(fileURLWithPath: filePath) as URL)
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+                playerViewController.player?.play()
+                self.present(playerViewController, animated:true, completion: nil)
             }
         }
         
