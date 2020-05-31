@@ -11,5 +11,6 @@ pod 'Floaty', '~> 4.2.0'
 pod "GSImageViewerController"
 pod 'Swifter', '~> 1.4.7'
 pod 'Alamofire', '~> 5.2'
+pod "PromiseKit", "~> 6.8"
 
 end

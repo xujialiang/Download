@@ -202,8 +202,6 @@
                         <segue destination="Msd-3D-Ckn" kind="presentation" identifier="showCreateDownloadTask" id="weU-mW-WlW"/>
                         <segue destination="6JL-bZ-YXh" kind="relationship" relationship="viewControllers" id="75L-Wc-fFT"/>
                         <segue destination="hz1-5a-Hnb" kind="relationship" relationship="viewControllers" id="1WA-9s-Hqe"/>
-                        <segue destination="wma-aI-G24" kind="relationship" relationship="viewControllers" id="Wsp-93-5iz"/>
-                        <segue destination="c8T-Sf-N5v" kind="relationship" relationship="viewControllers" id="25r-9d-gsd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vX-hg-7CP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

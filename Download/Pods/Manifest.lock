@@ -5,6 +5,15 @@ PODS:
   - Floaty (4.2.0)
   - GSImageViewerController (1.6.2)
   - MJRefresh (3.1.15.7)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
   - SnapKit (4.0.1)
   - Swifter (1.4.7)
 
@@ -15,6 +24,7 @@ DEPENDENCIES:
   - Floaty (~> 4.2.0)
   - GSImageViewerController
   - MJRefresh
+  - PromiseKit (~> 6.8)
   - SnapKit
   - Swifter (~> 1.4.7)
 
@@ -26,6 +36,7 @@ SPEC REPOS:
     - Floaty
     - GSImageViewerController
     - MJRefresh
+    - PromiseKit
     - SnapKit
     - Swifter
 
@@ -36,9 +47,10 @@ SPEC CHECKSUMS:
   Floaty: e2bd5a0f6f7f70899e26ff2da31081c8bee8d1b0
   GSImageViewerController: 3b8fb7d2ab7596152329d7910eeb1905b2284cb9
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
 
-PODFILE CHECKSUM: 5b378157b1fc4e8f00a6500384d274d57f64a45d
+PODFILE CHECKSUM: c2028defc10a2fa0a7dd8847682b7f3a77b9dbf6
 
 COCOAPODS: 1.9.2

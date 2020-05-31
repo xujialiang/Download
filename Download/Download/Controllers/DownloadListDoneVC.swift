@@ -75,11 +75,11 @@ extension DownloadListDoneVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = self.dataSource[indexPath.row]
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
         let reportAction = UIAlertAction(title: "查看", style: .default) { (action) in
-            let model = self.dataSource[indexPath.row]
+            
             if let name = model.model.name {
                 guard let uid = model.model.uid else {
                     return
@@ -115,13 +115,16 @@ extension DownloadListDoneVC: UITableViewDelegate, UITableViewDataSource {
 
             //2. Add the text field. You can configure it however you need.
             alert.addTextField { (textField) in
-                textField.text = "输入原因"
+                textField.placeholder = "请输入原因"
             }
 
             // 3. Grab the value from the text field, and print it when the user clicks OK.
             alert.addAction(UIAlertAction(title: "提交", style: .default, handler: { [weak alert] (_) in
                 let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
                 print("Text field: \(textField?.text)")
+                Api.default.report(link: model.model.url, reason: textField?.text).done { _ in
+                    debugPrint("提交成功")
+                }
             }))
 
             // 4. Present the alert.
