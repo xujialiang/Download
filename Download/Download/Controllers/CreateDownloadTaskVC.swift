@@ -31,6 +31,9 @@ class CreateDownloadTaskVC: UITableViewController {
             self.present(alert, animated: true)
         }
     }
+    @IBAction func cancelAct(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
