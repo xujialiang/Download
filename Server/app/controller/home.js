@@ -12,7 +12,7 @@ class HomeController extends Controller {
   async report() {
     const { ctx } = this;
     var md5 = CryptoJS.MD5(ctx.request.body.link).toString()
-    await ctx.app.redis.set('Xdownload/nodownloadlink/' + md5, ctx.request.body.reason);
+    await ctx.app.redis.set('Xdownload/nodownloadlink/' + md5, JSON.stringify(ctx.request.body));
     ctx.body = JSON.stringify({
       code: 0,
       data: null,
