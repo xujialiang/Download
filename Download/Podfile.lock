@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.2.1)
   - Bugly (2.5.4)
   - Cache (5.2.0)
   - Floaty (4.2.0)
@@ -8,6 +9,7 @@ PODS:
   - Swifter (1.4.7)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.2)
   - Bugly
   - Cache
   - Floaty (~> 4.2.0)
@@ -18,6 +20,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Bugly
     - Cache
     - Floaty
@@ -27,6 +30,7 @@ SPEC REPOS:
     - Swifter
 
 SPEC CHECKSUMS:
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   Bugly: 4edda9bb0e3017fd453612189069757195fa23ca
   Cache: 807c5d86d01a177f06ede9865add3aea269bbfd4
   Floaty: e2bd5a0f6f7f70899e26ff2da31081c8bee8d1b0
@@ -35,6 +39,6 @@ SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
 
-PODFILE CHECKSUM: dfbe22145a683b695b393878b5bea73182623d85
+PODFILE CHECKSUM: 5b378157b1fc4e8f00a6500384d274d57f64a45d
 
 COCOAPODS: 1.9.2
