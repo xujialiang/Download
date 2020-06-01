@@ -9,16 +9,18 @@
 import UIKit
 import XDownload
 import Bugly
+import Flutter
+// Used to connect plugins (only if you have plugins with iOS platform code).
+import FlutterPluginRegistrant
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: FlutterAppDelegate {
 
-    var window: UIWindow?
     var backgroundid: UIBackgroundTaskIdentifier?
     
+    lazy var flutterEngine = FlutterEngine(name: "my flutter engine")
     
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Bugly.start(withAppId: "5075f30a8d")
         MTA.start(withAppkey: "I745M6HRTVGT")
 
@@ -26,17 +28,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let _ = XHttpServer.default
         
+        flutterEngine.run();
+        // Used to connect plugins (only if you have plugins with iOS platform code).
+        GeneratedPluginRegistrant.register(with: self.flutterEngine);
+        
         return true
     }
 
-    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+    override func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession")
         XDownload.default.backgroundSessionCompletionHandler = completionHandler
     }
     
     
     
-    func applicationDidEnterBackground(_ application: UIApplication) {
+    override func applicationDidEnterBackground(_ application: UIApplication) {
         debugPrint("applicationDidEnterBackground")
         self.backgroundid =  UIApplication.shared.beginBackgroundTask(withName: "DownloadBackgroundSessionIdentifier", expirationHandler: {
             debugPrint("applicationDidEnterBackground expirationHandler")
@@ -46,13 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
     
-    func applicationWillTerminate(_ application: UIApplication) {
+    override func applicationWillTerminate(_ application: UIApplication) {
         debugPrint("杀死程序")
         XDownload.default.cancelAllTask()
         debugPrint("取消了所有任务")
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if MTAAutoTrack.handle(url) {
             return true
         }

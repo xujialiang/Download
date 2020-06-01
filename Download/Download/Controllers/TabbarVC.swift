@@ -8,6 +8,7 @@
 
 import UIKit
 import Floaty
+import Flutter
 
 class TabbarVC: UITabBarController {
 
@@ -17,6 +18,8 @@ class TabbarVC: UITabBarController {
         let floaty = Floaty()
         floaty.addItem("", icon: UIImage(named: "DownloadtoCloud")!, handler: { item in
             self.performSegue(withIdentifier: "showCreateDownloadTask", sender: self)
+            self.showFlutter()
+            
             floaty.close()
         })
         floaty.friendlyTap = false
@@ -24,5 +27,11 @@ class TabbarVC: UITabBarController {
         floaty.paddingY = 80
         self.view.addSubview(floaty)
     }
-
+    
+    @objc func showFlutter() {
+      let flutterEngine = (UIApplication.shared.delegate as! AppDelegate).flutterEngine
+      let flutterViewController =
+          FlutterViewController(engine: flutterEngine, nibName: nil, bundle: nil)
+      present(flutterViewController, animated: true, completion: nil)
+    }
 }
