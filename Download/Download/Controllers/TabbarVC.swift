@@ -17,7 +17,7 @@ class TabbarVC: UITabBarController {
 
         let floaty = Floaty()
         floaty.addItem("", icon: UIImage(named: "DownloadtoCloud")!, handler: { item in
-            self.performSegue(withIdentifier: "showCreateDownloadTask", sender: self)
+//            self.performSegue(withIdentifier: "showCreateDownloadTask", sender: self)
             self.showFlutter()
             
             floaty.close()
@@ -32,6 +32,9 @@ class TabbarVC: UITabBarController {
       let flutterEngine = (UIApplication.shared.delegate as! AppDelegate).flutterEngine
       let flutterViewController =
           FlutterViewController(engine: flutterEngine, nibName: nil, bundle: nil)
+//
+//        flutterViewController.setInitialRoute("/home2")
+        flutterViewController.pushRoute("/home2");
       present(flutterViewController, animated: true, completion: nil)
     }
 }

@@ -19,7 +19,13 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: MyHomePage(title: 'Flutter Demo Home Page0'),
+      // initialRoute: '/',
+      routes: <String, WidgetBuilder> {
+          '/': (BuildContext context) => MyHomePage(title: 'Flutter Demo Home Page00'),
+          '/home1': (BuildContext context) => MyHomePage(title: 'Flutter Demo Home Page1'),
+          '/home2': (BuildContext context) => MyHomePage(title: 'Flutter Demo Home Page2'),
+        },
     );
   }
 }
@@ -91,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'You have pushed the button this many times1f:',
             ),
             Text(
               '$_counter',
